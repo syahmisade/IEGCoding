@@ -41,3 +41,27 @@ print("Product:",product)
 print("Quantity:",quantity)
 print("Price:",price)
 print("Availability:",available)
+
+print(" ")
+print("#######################################################")
+print(" ")
+
+# From Mr.Jegan ##################################################################
+# type is another build in function that tell us what is the data type of the variables
+# (Dynamically assigned by python)
+##################################################################################
+print(type(product))
+print(type(quantity))
+print(type(price))
+print(type(available))
+
+print(" ")
+print("#######################################################")
+print(" ")
+
+# Always remember this: BODMAS
+a=1
+b=2
+c=3
+z = (a + b) / c
+print(z)

@@ -65,3 +65,31 @@ b=2
 c=3
 z = (a + b) / c
 print(z)
+
+print(" ")
+print("#######################################################")
+print(" ")
+
+# From Mr.Jegan ################################################################
+# Variables will always dynamically Typed Programming Language
+# Python is dynamically typed programming language
+################################################################################
+
+totalPrice = quantity * price
+print("Total: ",totalPrice)
+
+quantityString = "10"
+print(type(quantityString))
+
+# Cannot recive result because the variables have different data types
+# result = quantityString * price
+# print(result)
+
+# From Mr.Jegan ################################################################
+# Type casting
+# Convert one data type into another data type
+# To convert string to integer => using build in function int
+################################################################################
+
+result = int(quantityString) * float(price)
+print(result)

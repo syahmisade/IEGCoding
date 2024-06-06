@@ -25,10 +25,11 @@ print(id(b)) # To receive the location address of the b in RAM
 x = 7
 y = 2
 
-print("Addition: ",x+y) # print() takes the expression as an argument
-print("Subtraction: ",x-y)
-print("Multiplication: ",x*y)
-print("Division: ",x/y)
-print("Quotient: ",x//y)
-print("Remainder: ",x%y)
-
+print("Addition:",x+y) # print() takes the expression as an argument
+print("Subtraction:",x-y)
+print("Multiplication:",x*y)
+print("Division:",x/y)
+print("Quotient:",x//y)
+print("Remainder:",x%y)
+print("Exponent:", 10**3)
+print("What is the maximum number in a 64 bit env:", (2**64)-1)

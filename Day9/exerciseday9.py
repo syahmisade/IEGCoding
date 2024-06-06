@@ -1,9 +1,12 @@
 # Try reverse the number. Expected 13579
 '''
+% => Modulus Operator
+// => double slice operator
+'''
 x = 97531
 y = 1*10000 + 3*1000 + 5*100 + 7*10 + 9
-print(y)
-'''
+# print(y)
+
 a0 = 97531
 
 result = a0 % 10 # r: 1
@@ -24,4 +27,12 @@ a5 = a4 // 10 # q: 0
 print(result, a5) # 13579
 
 # Akmal Solution (One of the student) die nak pindah semua terus pegi hujung ke hujung
+
+# Example of creating a Monday to Friday counts
+'''
+Use the reminder: modulus operation (%)
+'''
+currentday = 0
+totaldays = 5
+print(0%5)
 

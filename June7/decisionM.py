@@ -22,5 +22,5 @@ elif(breakeven):
     print("You are breakeven my G. All good G")
 
 print(" ")
-print("="*60)
-print("Have a good day bruv!")
+print("="*10)
+print("TQVM")

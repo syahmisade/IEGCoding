@@ -48,4 +48,32 @@ print(x,y)
 ###############################################################################
 z = 0 # Numeric Initialization 
 z = "" # String Initialization
-z = None # None type (Third keyword from Boolean)
+z = None # None type (Third keyword for Boolean)
+
+###############################################################################
+'''
+Definete Statement
+(Truth table)
+
+and
+or
+xor
+and more
+
+'''
+varA = 21
+varB = 14
+varC = 7 
+
+print(varA>varB and varA>varC) #varA is the greatest number
+print(varC < varA and varC < varB) #varC is the smallest
+print(varB>varC and varB<varA) 
+print((varB<varA)or(varB>varC))
+
+###############################################################################
+'''
+Negation operator
+
+not(Argument)
+
+'''

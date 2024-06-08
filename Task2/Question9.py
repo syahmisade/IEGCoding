@@ -5,7 +5,7 @@ result = a0 % 10
 a1 = a0 // 10
 
 result = (result*10)+(a1%10)
-a2 = a1 // 10 
+# a2 = a1 // 10 
 
 # print(a0,result) 
 

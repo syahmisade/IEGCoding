@@ -5,21 +5,17 @@ line = "="*50
 
 ownerpermission = 0b111 # 0b == represent binary number from basic decimal number
 oPBit = "{0:b}".format(ownerpermission)
-
-print(f"{ownerpermission} is the owner permission")
-print(f"{oPBit} is the owner permission in binary format")
-
-print(line)
-
 filepermission = 0b111101001
 fPBit = "{0:b}".format(filepermission)
 
+print(f"{ownerpermission} is the owner permission")
+print(f"{oPBit} is the owner permission in binary format")
+print(line)
 print(f"{filepermission} is the file permission")
 print(f"{fPBit} is the file permission in binary format")
 #owner == Read,Write,Execute
 #group == Read,Execute
 #other == Execute
-
 print(line)
 
 '''

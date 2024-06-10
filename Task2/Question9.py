@@ -1,4 +1,8 @@
+'''
+Mr.Jegan:
+1. Look for the Adam's Number example (Try to study the formula)
 
+'''
 a0 = int(input("PLEASE ENTER A 2 DIGIT NUMBER: "))
 
 result = a0 % 10

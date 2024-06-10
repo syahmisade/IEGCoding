@@ -74,3 +74,26 @@ print(f"The message is {message} and thebinary format is {bin(message)}")
 print(f"The key is {key} and the binary format is {bin(key)}")
 print(f"The encrypted message is {encrypted_message} in decimal and {bin(encrypted_message)} in binary")
 print(f"The decrypted message is {decrypted_message} in decimal and {bin(decrypted_message)} in binary")
+
+print(line)
+
+'''
+Complement
+5 == 0101
+1s complement == 1010
+2s complement == 1011 (1s complement + 1)
+Unary Negative == (-)
+Unary Positive == (+)
+'''
+number = 5
+onesComplement = ~number
+twosComplement = ~number + 1
+unaryNegative = -number
+unaryPositive = +number
+
+print(f"COMPLEMENT OPERATION")
+print(f"The number is {number} and the binary format is {bin(number)}")
+print(f"The 1's complement is {onesComplement} & the binary is {bin(onesComplement)}")
+print(f"The 2's complement is {twosComplement} & the binary is {bin(twosComplement)}")
+print(f"The unary negative is {unaryNegative} & the binary is {bin(unaryNegative)}")
+print(f"The unary positive is {unaryPositive} & the binary is {bin(unaryPositive)}")

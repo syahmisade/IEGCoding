@@ -5,6 +5,8 @@ Special Characters for String type:
 \t == tab key
 \f == form feed
 \n == new line
+\\ == backslash
+f string???
 '''
 
 message = '''

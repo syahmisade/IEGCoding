@@ -1,6 +1,7 @@
 '''
 Bitwise Operation (This only apply for binary)
 '''
+line = "="*50
 
 ownerpermission = 0b111 # 0b == represent binary number from basic decimal number
 oPBit = "{0:b}".format(ownerpermission)
@@ -8,7 +9,7 @@ oPBit = "{0:b}".format(ownerpermission)
 print(f"{ownerpermission} is the owner permission")
 print(f"{oPBit} is the owner permission in binary format")
 
-print("="*50)
+print(line)
 
 filepermission = 0b111101001
 fPBit = "{0:b}".format(filepermission)
@@ -19,7 +20,7 @@ print(f"{fPBit} is the file permission in binary format")
 #group == Read,Execute
 #other == Execute
 
-print("="*50)
+print(line)
 
 '''
 In categorical data, CONVERT them to numbers which the machine can understand.
@@ -40,7 +41,7 @@ maskBinary = "{0:b}".format(mask)
 
 print(f"The mask value is: {mask} in decimal and {maskBinary} in binary")
 
-print("="*50)
+print(line)
 
 #AND Binary
 andBit = (filepermission & mask) >> 3 # >> == movekan nombor sekian2 ke kanan #decimal
@@ -50,7 +51,7 @@ print("AND OPERATION")
 print(f"The binary for AND operation is {andBitBinary}") 
 print(f"The decimal for AND operation is {andBit}") #decimal
 
-print("="*50)
+print(line)
 
 #OR Operation
 orBit = filepermission | mask
@@ -60,7 +61,7 @@ print("OR OPERATION")
 print(f"The binary for OR operation is {orBitBinary}") 
 print(f"The decimal for OR operation is {orBit}") #decimal
 
-print("="*50)
+print(line)
 
 '''
 We can create a key based on ASCII character

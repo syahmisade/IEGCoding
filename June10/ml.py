@@ -39,7 +39,7 @@ print(f"The mask value is: {mask} in decimal and {maskBinary} in binary")
 
 print(line)
 
-#AND Binary
+#AND Binary ==================================================================================
 andBit = (filepermission & mask) >> 3 # >> == movekan nombor sekian2 ke kanan #decimal
 andBitBinary = "{0:b}".format(andBit)
 
@@ -49,7 +49,7 @@ print(f"The decimal for AND operation is {andBit}") #decimal
 
 print(line)
 
-#OR Operation
+#OR Operation =================================================================================
 orBit = filepermission | mask
 orBitBinary = "{0:b}".format(orBit)
 
@@ -63,7 +63,7 @@ print(line)
 We can create a key based on ASCII character
 This is more related on encrypted data or information
 '''
-# XOR Operation
+# XOR Operation ===============================================================================
 message = 0b10100101
 key = 0b11001100
 encrypted_message = message ^ key

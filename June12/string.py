@@ -15,3 +15,7 @@ b = "Selamat pagi semua sahabat organik"
 print(a.upper()) # HELLO (Example of Method)
 print(a.lower()) # hello (Example of Method)
 print(b.split())
+
+x = "dwdad afdsd"
+y = x.split()
+print(y)

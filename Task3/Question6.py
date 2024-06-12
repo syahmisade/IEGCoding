@@ -19,7 +19,7 @@ k = 0b00010100
 toggle = x ^ k
 print(f"Toggle 3rd and 5th bits for {bin(x)} is {bin(toggle)}")
 
-# 3. Check if given 2 numbers are different
+# 3. Check if given 2 numbers are different (tak tahu nak terang mcm mana)
 a = 29
 b = 15
 

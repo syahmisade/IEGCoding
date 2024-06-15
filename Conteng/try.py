@@ -46,19 +46,19 @@
 # y = list(map(int, num))
 # print(y)
 
-n = 152
-digitAmount = len(str(n))
-digits = list(map(int, str(n)))
-armstrongNum = []
-total = 0
+# n = 152
+# digitAmount = len(str(n))
+# digits = list(map(int, str(n)))
+# armstrongNum = []
+# total = 0
 
-for digit in digits:
-    cubeDigit = digit**digitAmount
-    total += cubeDigit
-print(total)
+# for digit in digits:
+#     cubeDigit = digit**digitAmount
+#     total += cubeDigit
+# print(total)
 
-if n == total:
-    print(f"{n} is a Armstrong Number")
-else:
-    print(f"{n} is not a Armstrong Number")
+# if n == total:
+#     print(f"{n} is a Armstrong Number")
+# else:
+#     print(f"{n} is not a Armstrong Number")
 

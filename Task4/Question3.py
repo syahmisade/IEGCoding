@@ -16,7 +16,6 @@ for num in nums:
         adamNum.append(num)
 
 if len(adamNum) == x:
-    g
 
 statement = f"The adam numbers are {adamNum}"
 print(statement)

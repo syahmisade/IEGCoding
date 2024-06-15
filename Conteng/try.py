@@ -95,3 +95,5 @@ if n == total:
 else:
     print(f"{n} is not a Armstrong Number")
 >>>>>>> 34b399604953a4f0509967d1a63776c9ff130c24
+
+tm nb 

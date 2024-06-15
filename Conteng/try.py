@@ -39,6 +39,7 @@
 # x = (2750-800)//130
 # print(x) #200
 
+<<<<<<< HEAD
 # m=2
 # total=0
 # while(m<6):
@@ -70,3 +71,27 @@ while(z>0):
 
 # for multiplayer in multi200:
 #     print(f"{multiplayer} x {const} = {multiplayer * const}")
+=======
+# rev = int(str(12)[::-1])
+# print(rev)
+
+# num = str(123)
+# y = list(map(int, num))
+# print(y)
+
+n = 152
+digitAmount = len(str(n))
+digits = list(map(int, str(n)))
+armstrongNum = []
+total = 0
+
+for digit in digits:
+    cubeDigit = digit**digitAmount
+    total += cubeDigit
+print(total)
+
+if n == total:
+    print(f"{n} is a Armstrong Number")
+else:
+    print(f"{n} is not a Armstrong Number")
+>>>>>>> 34b399604953a4f0509967d1a63776c9ff130c24

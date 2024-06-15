@@ -1,4 +1,4 @@
-x = 0b10101100 
+x = 0b10101100
 y = 0b11010010
 
 # 1. Swap value x and y w.o using temporary variable
@@ -25,7 +25,7 @@ b = 15
 
 binNum = a ^ b
 
-if(binNum):
-  print(f"{bin(a)} and {bin(b)} are 2 different numbers")
+if (binNum):
+    print(f"{bin(a)} and {bin(b)} are 2 different numbers")
 else:
-  print(f"{bin(a)} and {bin(b)} are 2 same numbers")
+    print(f"{bin(a)} and {bin(b)} are 2 same numbers")

@@ -6,8 +6,8 @@ Create a multiplication table 0f 5
 1 x 5 = 5
 2 x 5 = 10
 
-* For loop == not a conditional loop (using range)
-* While loop == a conditional loop
+* For loop == a conditional loop
+* While loop == not a conditional loop (using range)
 * BUT BOTH CAN HAVE BLOCK (else:)
 
 range() == iterable object 

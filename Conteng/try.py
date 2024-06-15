@@ -62,4 +62,3 @@ if n == total:
 else:
     print(f"{n} is not a Armstrong Number")
 
-tm nb 

@@ -6,7 +6,7 @@ y = 1
 adamNum = []
 # lenAN = len(adamNum)
 
-while x>len(adamNum):
+while x > len(adamNum):
     revNum = int(str(y)[::-1])
     sqrNum = y**2
     sqrRevNum = revNum**2
@@ -14,8 +14,9 @@ while x>len(adamNum):
 
     if sqrNum == revSqrRevNum:
         adamNum.append(y)
-    
-    y+=1
-    
+
+    y += 1
+
+
 statement = f"The {x} adam numbers are {adamNum}"
 print(statement)

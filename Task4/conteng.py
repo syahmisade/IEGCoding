@@ -1,10 +1,11 @@
-import sys
+numbers = [1, 2, 3, 4, 5]
 
-cmdarguments = sys.argv
-print(cmdarguments)
-
-total = 0
-for number in cmdarguments[1:]:  # loop from [1] until the end of the list
-    total = total + int(number)
-    # print(total) # Ni nnt print satu demi satu dalam cmd
-print(total)
+# Using a set to check for uniqueness
+seen = set()
+for num in numbers:
+    if num in seen:
+        print("Not all elements are unique.")
+        break
+    seen.add(num)
+else:
+    print("All elements are unique.")

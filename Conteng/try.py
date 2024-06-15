@@ -62,3 +62,54 @@
 # else:
 #     print(f"{n} is not a Armstrong Number")
 
+####################################################################
+# x = 3
+# adamNum = []
+# lenAN = len(adamNum)
+# num = 1
+
+# while x > lenAN:
+#     revNum = int(str(num)[::-1])
+#     sqrNum = num**2
+#     sqrRevNum = revNum**2
+#     revSqrRevNum = int(str(sqrRevNum)[::-1])
+
+#     if sqrNum == revSqrRevNum:
+#         adamNum.append(num)
+    
+#     num+=1
+
+# statement = f"The adam numbers are {adamNum}"
+# print(statement)
+
+# num_items = int(input("Enter the number of Adam numbers to generate: "))
+
+# Get the number of Adam numbers to generate from user input
+num_items = int(input("Enter the number of Adam numbers to generate: "))
+
+# Initialize variables
+adam_numbers = []
+num = 1
+
+# Helper to reverse a number
+def reverse_number(n):
+    return int(str(n)[::-1])
+
+# Generate the required number of Adam numbers
+while len(adam_numbers) < num_items:
+    # Calculate the square of the number
+    original_square = num ** 2
+    
+    # Reverse the number and calculate the square of the reversed number
+    reversed_num = reverse_number(num)
+    reversed_square = reversed_num ** 2
+    
+    # Check if the reverse of the square of the number matches the square of the reversed number
+    if reverse_number(original_square) == reversed_square:
+        adam_numbers.append(num)
+    
+    # Move to the next number
+    num += 1
+
+# Print the Adam numbers
+print(f"The first {num_items} Adam numbers are: {adam_numbers}")

@@ -1,7 +1,7 @@
 '''
 Print first 10 prime numbers using for loop
 
-# much simpler ones (possible untuk pakai while loop)
+# much simpler ones (the best logic adalah untuk pakai while loop)
 nums = range(2,31)
 
 print("This are the prime number: ")

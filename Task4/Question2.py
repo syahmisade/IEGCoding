@@ -1,5 +1,19 @@
 '''
 Print first 10 prime numbers using for loop
+
+# much simpler ones (possible untuk pakai while loop)
+nums = range(2,31)
+
+print("This are the prime number: ")
+for num in nums:
+    prime = True
+    numRange = range(2,num)
+    for i in numRange:
+        if num % i == 0:
+            prime = False
+            break
+    if prime == True:
+        print(f"{num}",end=" ")
 '''
 nums = range(1, 31)
 primeNum = []

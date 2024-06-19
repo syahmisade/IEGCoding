@@ -114,10 +114,23 @@
 # # Print the Adam numbers
 # print(f"The first {num_items} Adam numbers are: {adam_numbers}")
 
-y = 12 # int
-rev = int(str(y)[::-1])
-revsqr = rev**2
-print(rev)
-print(type(rev))
-print(revsqr)
+# y = 12 # int
+# rev = int(str(y)[::-1])
+# revsqr = rev**2
+# print(rev)
+# print(type(rev))
+# print(revsqr)
+
+nums = range(2,31)
+
+print("This are the prime number: ")
+for num in nums:
+    prime = True
+    numRange = range(2,num)
+    for i in numRange:
+        if num % i == 0:
+            prime = False
+            break
+    if prime == True:
+        print(f"{num}",end=" ")
 

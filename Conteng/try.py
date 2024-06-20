@@ -121,16 +121,108 @@
 # print(type(rev))
 # print(revsqr)
 
-nums = range(2,31)
+# nums = range(2,31)
 
-print("This are the prime number: ")
-for num in nums:
-    prime = True
-    numRange = range(2,num)
-    for i in numRange:
-        if num % i == 0:
-            prime = False
-            break
-    if prime == True:
-        print(f"{num}",end=" ")
+# print("This are the prime number: ")
+# for num in nums:
+#     prime = True
+#     numRange = range(2,num)
+#     for i in numRange:
+#         if num % i == 0:
+#             prime = False
+#             break
+#     if prime == True:
+#         print(f"{num}",end=" ")
+
+# x,y,z = input(" ").split(" ")
+# print(x,y,z)
+
+# # 10 -> x
+# count = 0
+# givenNumber = 2
+# x = input()
+# while count < int(x):
+#     isPrime = True
+#     divisors = range(2,givenNumber)
+#     for i in divisors:
+#         if givenNumber % i == 0:
+#             isPrime = False
+#             break
+#     if isPrime == True:
+#         print(f"{givenNumber}",end=" ")
+#         count += 1
+#     givenNumber += 1
+
+# x = int(input(" "))
+# alist = []
+# fn = 30
+# sn = 35
+# countF = 0
+# countS = 0
+# count = 0
+
+# while count<x:
+
+#     if count % 2 == 0:
+#         fn += countF
+#         alist.append(fn)
+#         countF+=8
+#     else:
+#         sn += countS
+#         alist.append(sn)
+#         countS+=6
+
+#     count+=1
+
+# for num in alist:
+#     print(f"{num}",end=" ")
+# n = "123"
+# nlist = list(n)
+# print(nlist)
+
+# n = input()
+# nlist = list(n)
+# x=0
+# y=0
+# if int(n)<10:
+#     print("Invalid Input")
+# else:
+#     for num in nlist:
+#         if num == nlist[0]:
+#             x += int(num)
+#         elif num == nlist[-1]:
+#             y += int(num)
+
+#     if x>=y:
+#         z = x-y
+#     else:
+#         z = y-x
+#     print(z)
+
+# numpS1 = int(input("Enter the number of people who watched show 1"))
+# numaS1 = float(input("Enter the average rating for show 1"))
+# numpS2 = int(input("Enter the number of people who watched show 2"))
+# numaS2 = float(input("Enter the average rating for show 2"))
+# numpS3 = int(input("Enter the number of people who watched show 3"))
+# numaS3 = float(input("Enter the average rating for show 3"))
+
+# totalfS1 = numpS1*numaS1
+# totalfS2 = numpS2*numaS2
+# totalfS3 = numpS3*numaS3
+
+# totalF = totalfS1+totalfS2+totalfS3
+
+# totalP = numpS1+numpS2+numpS3
+
+# totalAveRating = totalF/totalP
+
+# statement = f"The overall average rating for the show is {totalAveRating:.2f}"
+
+# a=(0,1,2,3,4)
+# b=slice(0,2)
+# print(a[b])
+
+# x = input()
+# y = int(input())
+
 

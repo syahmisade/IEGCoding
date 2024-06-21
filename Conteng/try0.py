@@ -1,25 +1,34 @@
-# Input Format:
-# The first line of the input is the first date.
-# The second line of the input is the second date. 
-# Output Format :
-# The output is a count of days separated by space with the difference in time in the format "53 days, 5:43:00"(without quotes).
-# Refer to sample input and output for further formatting specifications.
+# Input format:
+# The first line contains the integer, which indicates the number of students, 'n'.
+# The next 'n' lines contain the name and marks obtained by that student separated by a space.
+# The final line contains the name of a particular student to find the second-highest mark of him.
 
-# Sample Input and Output 1:
-# Jul 1 2014 2:43PM
-# Aug 23 2014 8:26PM
-# 53 days, 5:43:00
+# Output format:
+# The output is the second-highest mark obtained by the particular student. If he scored the same marks in all subjects, then print a message as shown sample I/O.
+# If the student name does not exist then print  "Student doesn't exist". [Refer Sample I/O]
 
-# Sample Input and Output 2:
-# Jan 1 2014 2:43PM
-# Jul 21 2014 12:43PM
-# 200 days, 22:00:00
+# Sample Input 1:
+# 4
+# Sandy 78 67 89 100
+# John 45 46 48 23
+# Cherry 78 78 78 78
+# Ratan 78 90 89 56
+# Sandy
+# Sample Output 1:
+# Second Highest mark of Sandy: 89
+ 
 
-import datetime
-from datetime import datetime as dt
-date_format = "%b %d %Y %I:%M%p"
-t1 = dt.strptime(input(), date_format)
-t2 = dt.strptime(input(), date_format)
-delta = t2 - t1
-print(f"{delta.days} days,", end=' ')
-print(str(delta).split(', ')[1])
+# Sample Input 2:
+# 2
+# sath 100 100 100 100
+# jan 67 56 34 89
+# sath
+# Sample Output 2:
+# sath scored same marks in all subjects: 100
+# Sample Input 3:
+# 2
+# Ratan 78 90 89 56
+# Sandy 78 67 89 100
+# pooja
+# Sample Output 3:
+# Student doesn't exist

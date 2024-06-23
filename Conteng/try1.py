@@ -1,33 +1,46 @@
-def soe(limit):
-    sieve = [True] * (limit + 1)
-    sieve[0:2] = [False, False]
+def number_to_words(num):
+    # Define dictionaries for words representing numbers
+    units = ["", "one", "two", "three", "four",
+             "five", "six", "seven", "eight", "nine"]
+    teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
+             "seventeen", "eighteen", "nineteen"]
+    tens = ["", "", "twenty", "thirty", "forty",
+            "fifty", "sixty", "seventy", "eighty", "ninety"]
+    thousands = ["", "thousand", "million", "billion", "trillion"]
 
-    for currentPrime in range(2, int(limit**0.5)+1):
-        if sieve[currentPrime]:
-            for multiple in range(currentPrime**2, limit+1, currentPrime):
-                sieve[multiple] = False
+    # Function to convert a number less than 100 into words
+    def convert_less_than_100(n):
+        if n < 10:
+            return units[n]
+        elif n < 20:
+            return teens[n - 10]
+        else:
+            # Correct handling of tens and units
+            return tens[n // 10] + ("-" + units[n % 10] if n % 10 != 0 else "")
 
-    primeNum = []
+    if num == 0:
+        return "zero"
 
-    for p in range(2, limit + 1):
-        if sieve[p]:
-            primeNum.append(p)
-    return primeNum
+    # Initialize result as an empty list
+    words = []
+    # Track position in thousands (0: units, 1: thousands, 2: millions, etc.)
+    position = 0
+
+    while num > 0:
+        # Process numbers in groups of three digits
+        chunk = num % 1000
+        if chunk != 0:
+            chunk_words = convert_less_than_100(chunk)
+            if position > 0:
+                # Adjusted position indexing
+                chunk_words += " " + thousands[position - 1]
+            words.insert(0, chunk_words)
+        num //= 1000
+        position += 1
+
+    return " ".join(words)
 
 
-def gpn(num):
-    primes = soe(1000000)
-
-    for p in primes:
-        perfNum = 2**(p-1)*(2**p - 1)
-        yield perfNum
-        if num <= 1:
-            break
-        num -= 1
-
-
-num = 10
-statement = f"The first {10} perfect numbers are :"
-print(statement)
-for pNum in gpn(num):
-    print(pNum)
+# Test the function
+number = int(input("Enter a number to translate into words: "))
+print(number_to_words(number))

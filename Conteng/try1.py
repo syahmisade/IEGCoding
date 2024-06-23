@@ -1,46 +1,64 @@
-def number_to_words(num):
-    # Define dictionaries for words representing numbers
-    units = ["", "one", "two", "three", "four",
-             "five", "six", "seven", "eight", "nine"]
-    teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen",
-             "seventeen", "eighteen", "nineteen"]
-    tens = ["", "", "twenty", "thirty", "forty",
-            "fifty", "sixty", "seventy", "eighty", "ninety"]
-    thousands = ["", "thousand", "million", "billion", "trillion"]
+def number_to_words(n):
 
-    # Function to convert a number less than 100 into words
-    def convert_less_than_100(n):
-        if n < 10:
-            return units[n]
-        elif n < 20:
-            return teens[n - 10]
+    def satuDigit(num):
+        nums = {
+            1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
+            6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
+        }
+        return nums.get(num, '')
+
+    def digitBelas(num):
+        nums = {
+            10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen',
+            15: 'fifteen', 16: 'sixteen', 17: 'seventeen', 18: 'eighteen', 19: 'nineteen'
+        }
+        return nums.get(num, '')
+
+    def digitPuluh(num):
+        nums = {
+            20: 'twenty', 30: 'thirty', 40: 'forty', 50: 'fifty', 60: 'sixty',
+            70: 'seventy', 80: 'eighty', 90: 'ninety'
+        }
+        return nums.get(num, '')
+
+    def duaDigit(num):
+        if not num:
+            return ''
+        elif num < 10:
+            return satuDigit(num)
+        elif num < 20:
+            return digitBelas(num)
         else:
-            # Correct handling of tens and units
-            return tens[n // 10] + ("-" + units[n % 10] if n % 10 != 0 else "")
+            puluh = num // 10 * 10
+            baki = num % 10
+            return digitPuluh(puluh) + ('-' + satuDigit(baki) if baki else '')
 
-    if num == 0:
+    def tigaDigit(num):
+        hundred = num // 100
+        baki = num % 100
+        if hundred and baki:
+            return satuDigit(hundred) + ' hundred ' + duaDigit(baki)
+        elif not hundred and baki:
+            return duaDigit(baki)
+        elif hundred and not baki:
+            return satuDigit(hundred) + ' hundred'
+        else:
+            return ''
+
+    ribu = n // 1000
+    baki = n % 1000
+
+    if n == 0:
         return "zero"
 
-    # Initialize result as an empty list
-    words = []
-    # Track position in thousands (0: units, 1: thousands, 2: millions, etc.)
-    position = 0
+    if ribu and baki:
+        return tigaDigit(ribu) + ' thousand ' + tigaDigit(baki)
+    elif not ribu and baki:
+        return tigaDigit(baki)
+    elif ribu and not baki:
+        return tigaDigit(ribu) + ' thousand'
+    else:
+        return ''
 
-    while num > 0:
-        # Process numbers in groups of three digits
-        chunk = num % 1000
-        if chunk != 0:
-            chunk_words = convert_less_than_100(chunk)
-            if position > 0:
-                # Adjusted position indexing
-                chunk_words += " " + thousands[position - 1]
-            words.insert(0, chunk_words)
-        num //= 1000
-        position += 1
-
-    return " ".join(words)
-
-
-# Test the function
-number = int(input("Enter a number to translate into words: "))
+number = int(input("Enter a number: "))
 print(number_to_words(number))

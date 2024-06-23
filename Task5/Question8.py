@@ -37,14 +37,14 @@ def number_to_words(n):
             return digitPuluh(puluh) + ('-' + satuDigit(baki) if baki else '')
 
     def tigaDigit(num):
-        hundred = num // 100
+        ratus = num // 100
         baki = num % 100
-        if hundred and baki:
-            return satuDigit(hundred) + ' hundred ' + duaDigit(baki)
-        elif not hundred and baki:
+        if ratus and baki:
+            return satuDigit(ratus) + ' hundred ' + duaDigit(baki)
+        elif not ratus and baki:
             return duaDigit(baki)
-        elif hundred and not baki:
-            return satuDigit(hundred) + ' hundred'
+        elif ratus and not baki:
+            return satuDigit(ratus) + ' hundred'
         else:
             return ''
 

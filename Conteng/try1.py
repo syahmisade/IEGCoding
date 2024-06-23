@@ -1,10 +1,33 @@
-x = [23,43,65,78]
-y = sorted(x)
+def soe(limit):
+    sieve = [True] * (limit + 1)
+    sieve[0:2] = [False, False]
 
-for i in range(len(y)-1):
-    if y[i] == y[i+1]:
-        print("Duplicate found")
-        break
-    if y[-1]>y[-2]:
-        print(f"Second highest {y[-2]}")
-        break
+    for currentPrime in range(2, int(limit**0.5)+1):
+        if sieve[currentPrime]:
+            for multiple in range(currentPrime**2, limit+1, currentPrime):
+                sieve[multiple] = False
+
+    primeNum = []
+
+    for p in range(2, limit + 1):
+        if sieve[p]:
+            primeNum.append(p)
+    return primeNum
+
+
+def gpn(num):
+    primes = soe(1000000)
+
+    for p in primes:
+        perfNum = 2**(p-1)*(2**p - 1)
+        yield perfNum
+        if num <= 1:
+            break
+        num -= 1
+
+
+num = 10
+statement = f"The first {10} perfect numbers are :"
+print(statement)
+for pNum in gpn(num):
+    print(pNum)

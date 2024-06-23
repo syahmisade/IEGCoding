@@ -1,64 +1,87 @@
-def number_to_words(n):
+# print("Please choose:\n 1. Roman numeral to Integer.\n 2. Integer to Roman numeral")
+# n = int(input())
 
-    def satuDigit(num):
-        nums = {
-            1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
-            6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
-        }
-        return nums.get(num, '')
+# if n == 1:
+#     roman_numeral = input("Enter a Roman numeral: ")
 
-    def digitBelas(num):
-        nums = {
-            10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen',
-            15: 'fifteen', 16: 'sixteen', 17: 'seventeen', 18: 'eighteen', 19: 'nineteen'
-        }
-        return nums.get(num, '')
+#     # make a dictonaries of data type
+#     roman_numerals = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+#     int_val = 0
 
-    def digitPuluh(num):
-        nums = {
-            20: 'twenty', 30: 'thirty', 40: 'forty', 50: 'fifty', 60: 'sixty',
-            70: 'seventy', 80: 'eighty', 90: 'ninety'
-        }
-        return nums.get(num, '')
+#     for i in range(len(roman_numeral)):
+#         if i > 0 and roman_numerals[roman_numeral[i]] > roman_numerals[roman_numeral[i - 1]]:
+#             int_val += roman_numerals[roman_numeral[i]] - 2 * roman_numerals[roman_numeral[i - 1]]
+#         else:
+#             int_val += roman_numerals[roman_numeral[i]]
+#     print("The integer value is ", int_val)
 
-    def duaDigit(num):
-        if not num:
-            return ''
-        elif num < 10:
-            return satuDigit(num)
-        elif num < 20:
-            return digitBelas(num)
-        else:
-            puluh = num // 10 * 10
-            baki = num % 10
-            return digitPuluh(puluh) + ('-' + satuDigit(baki) if baki else '')
+# elif n == 2:
+#     int_val = int(input("Enter an integer: "))
 
-    def tigaDigit(num):
-        hundred = num // 100
-        baki = num % 100
-        if hundred and baki:
-            return satuDigit(hundred) + ' hundred ' + duaDigit(baki)
-        elif not hundred and baki:
-            return duaDigit(baki)
-        elif hundred and not baki:
-            return satuDigit(hundred) + ' hundred'
-        else:
-            return ''
+#     # make a list of data type
+#     val = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+#     syb = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
 
-    ribu = n // 1000
-    baki = n % 1000
+#     roman_numeral = ''
+#     i = 0
 
-    if n == 0:
-        return "zero"
+#     while int_val > 0:
+#         for _ in range(int_val // val[i]):
+#             roman_numeral += syb[i]
+#             int_val -= val[i]
+#         i += 1
 
-    if ribu and baki:
-        return tigaDigit(ribu) + ' thousand ' + tigaDigit(baki)
-    elif not ribu and baki:
-        return tigaDigit(baki)
-    elif ribu and not baki:
-        return tigaDigit(ribu) + ' thousand'
-    else:
-        return ''
+#     print("The Roman numeral is ", roman_numeral)
 
-number = int(input("Enter a number: "))
-print(number_to_words(number))
+# roman_numeral = input("Enter a Roman numeral: ")
+
+# # Dictionary for Roman numeral values
+# roman_numerals = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+# int_val = 0
+
+# for i in range(len(roman_numeral)):
+#     current_value = roman_numerals.get(roman_numeral[i], 0)
+#     if i > 0 and current_value > roman_numerals.get(roman_numeral[i - 1], 0):
+#         int_val += current_value - 2 * roman_numerals.get(roman_numeral[i - 1], 0)
+#     else:
+#         int_val += current_value
+
+# print("The integer value is ", int_val)
+
+# roman_numerals = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+# romNum = "XVI"
+# romNumL = list(romNum)
+# listNum = []
+# result = 0
+
+# for num in romNumL:
+#     print(roman_numerals.get(num, 0))
+#     listNum.append(roman_numerals.get(num, 0))
+# for i in listNum:
+#     if listNum.index(i) > 0 and i > listNum[listNum.index(i) - 1]:
+#         result += i - 2 * listNum[listNum.index(i) - 1]
+#     else:
+#         result += i
+
+# print(romNumL)
+# print(listNum)
+# print(result)
+
+int_val = int(input("Enter an integer: "))
+
+# Dictionary for Roman numeral values and symbols
+roman_numerals = {
+    1000: "M", 900: "CM", 500: "D", 400: "CD",
+    100: "C", 90: "XC", 50: "L", 40: "XL",
+    10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"
+}
+
+roman_numeral = ''
+
+# Iterate over the dictionary items
+for value, symbol in roman_numerals.items():
+    while int_val >= value:
+        roman_numeral += symbol
+        int_val -= value
+
+print("The Roman numeral is ", roman_numeral)

@@ -8,7 +8,6 @@ def romToNum(romNum):
     result = 0
 
     for num in romNumL:
-        print(roman_numerals.get(num, 0))
         listNum.append(roman_numerals.get(num, 0))
     for i in listNum:
         if listNum.index(i) > 0 and i > listNum[listNum.index(i) - 1]:
@@ -16,28 +15,36 @@ def romToNum(romNum):
         else:
             result += i
 
-    statement = print(result)
+    statement = print(f"The Integer numeral is {result}")
     return statement
 
-romToNum("XIV")
-#####################################################################
 
-# int_val = int(input("Enter an integer: "))
+def numToRom(num):
+    roman_numerals = {
+        1000: "M", 900: "CM", 500: "D", 400: "CD",
+        100: "C", 90: "XC", 50: "L", 40: "XL",
+        10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"
+    }
 
-# # Dictionary for Roman numeral values and symbols
-# roman_numerals = {
-#     1000: "M", 900: "CM", 500: "D", 400: "CD",
-#     100: "C", 90: "XC", 50: "L", 40: "XL",
-#     10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"
-# }
+    roman_numeral = ''
 
-# roman_numeral = ''
+    # Iterate over the dictionary items
+    for value, symbol in roman_numerals.items():
+        while num >= value:
+            roman_numeral += symbol
+            num -= value
 
-# # Iterate over the dictionary items
-# for value, symbol in roman_numerals.items():
-#     while int_val >= value:
-#         roman_numeral += symbol
-#         int_val -= value
+    statement = print(f"The Roman numeral is {roman_numeral}")
+    return statement
 
-# print("The Roman numeral is ", roman_numeral)
 
+print("Choose\n 1. Roman number to integer\n 2. Integer to Roman number")
+x = int(input(" "))
+if x == 1:
+    romNum = input("Enter the Roman numeral: ")
+    romToNum(romNum)
+elif x == 2:
+    num = int(input("Enter the integer: "))
+    numToRom(num)
+else:
+    print("Invalid choice")

@@ -3,7 +3,7 @@ Lecture by Mr.Jegan
 
 *Pass value to another program -> program.py <<infromation OR argument<< using commandline 
 
-Dictionary:
+Library:
 1. Keywords
 2. Built-in function
 3. Modules

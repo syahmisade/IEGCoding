@@ -67,21 +67,51 @@
 # print(listNum)
 # print(result)
 
-int_val = int(input("Enter an integer: "))
+# int_val = int(input("Enter an integer: "))
 
-# Dictionary for Roman numeral values and symbols
-roman_numerals = {
-    1000: "M", 900: "CM", 500: "D", 400: "CD",
-    100: "C", 90: "XC", 50: "L", 40: "XL",
-    10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"
-}
+# # Dictionary for Roman numeral values and symbols
+# roman_numerals = {
+#     1000: "M", 900: "CM", 500: "D", 400: "CD",
+#     100: "C", 90: "XC", 50: "L", 40: "XL",
+#     10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"
+# }
 
-roman_numeral = ''
+# roman_numeral = ''
 
-# Iterate over the dictionary items
-for value, symbol in roman_numerals.items():
-    while int_val >= value:
-        roman_numeral += symbol
-        int_val -= value
+# # Iterate over the dictionary items
+# for value, symbol in roman_numerals.items():
+#     while int_val >= value:
+#         roman_numeral += symbol
+#         int_val -= value
 
-print("The Roman numeral is ", roman_numeral)
+# print("The Roman numeral is ", roman_numeral)
+
+def compress_string(s):
+    if not s:
+        return ""
+
+    compressed = []
+    count = 1
+    previous_char = s[0]
+
+    for char in s[1:]:
+        if char == previous_char:
+            count += 1
+        else:
+            compressed.append(previous_char + str(count))
+            previous_char = char
+            count = 1
+
+    # Add the last set of characters
+    compressed.append(previous_char + str(count))
+
+    # Join the list into a final compressed string
+    compressed_string = ''.join(compressed)
+
+    # Return the original string if the compressed one is not smaller
+    return compressed_string if len(compressed_string) < len(s) else s
+
+# Example usage
+input_string = "aabcccccaaa"
+compressed_output = compress_string(input_string)
+print(compressed_output)  # Output: a2b1c5a3

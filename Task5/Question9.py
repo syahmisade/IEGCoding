@@ -7,9 +7,9 @@ def romToNum(romNum):
     listNum = []
     result = 0
 
-    for num in romNumL:
-        listNum.append(roman_numerals.get(num, 0))
-    for i in listNum:
+    for num in romNumL: # XI == 11
+        listNum.append(roman_numerals[num]) # roman_numerals[i] == roman_numerals.get(i)
+    for i in listNum: # condition
         if listNum.index(i) > 0 and i > listNum[listNum.index(i) - 1]:
             result += i - 2 * listNum[listNum.index(i) - 1]
         else:

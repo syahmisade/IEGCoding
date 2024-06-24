@@ -34,7 +34,7 @@ The sum of its proper divisors (excluding 28 itself) is 1 + 2 + 4 + 7 + 14 = 28.
 #     return pNumbers
 
 
-# result = f"The first 10 numbers of perfect numbers are {loop(10)}"
+# result = f"The first 4 numbers of perfect numbers are {loop(4)}"
 # print(result)
 
 ### Code 2 ################################################################

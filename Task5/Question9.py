@@ -8,7 +8,7 @@ def romToNum(romNum):
     prevNum = 0
     
     for i in romNumL[::-1]:
-        if roman_numerals[i]>prevNum:
+        if roman_numerals[i]>=prevNum:
            result +=  roman_numerals[i]
            prevNum = result
         else:

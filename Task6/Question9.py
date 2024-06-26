@@ -20,6 +20,7 @@ def print_symmetric_pascals_triangle(rows):
     for row in triangle:
         row_str = " ".join(map(str, row))
         print(row_str.center(max_width))
+    return " "
 
 inputNum = int(input("Enter a number for Pascal's triangle: "))
 print(print_symmetric_pascals_triangle(inputNum))

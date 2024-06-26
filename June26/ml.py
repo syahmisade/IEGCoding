@@ -55,11 +55,3 @@ add = lambda a,b:a+b
 # OR
 def add(a,b):
     return a+b
-
-#--- Scope of variables --------------------------------------------------------
-x = 10
-
-def printX():
-    print(x)
-
-printX()

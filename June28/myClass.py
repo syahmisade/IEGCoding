@@ -5,7 +5,8 @@ Class:
 - Assign variables => creating a Class attributes
 - def __init__() => a function : can be used into coding
     - self => a variable : can be used into coding (used as parameter in __init__())
-
+- Another ways to collect data and display data gain from the input
+- Try check balik nota sir
 '''
 class Ultraman:
     planet = "Nebula M60" # one of the Class attributes
@@ -18,8 +19,8 @@ class Ultraman:
         self.__warna = warna
         self.listnama = "" # Initialize it as a blank so that we can submit something
     
-    # This is a method
-    def kuasa(self):
+    # This is a method => which have the same structure as functions
+    def getKuasa(self):
         statement = f"Kuasa {self.name} : {self.power}"
         return statement
 
@@ -37,9 +38,9 @@ class Ultraman:
 # --- Outside Class -----------------------------------------------------------------------------------------------------
     
 # Calling Class including the instances:  how many Arguments (== "Ultraman Gaia",1000) will be depending on the Class's Initializer
-ultraman = Ultraman("Ultraman Gaia",500,"Merah Putih Emas Hitam")
-name = ultraman.name # Signing Ultraman instance attributes
-kuasa = ultraman.kuasa() # Calling a method from Ultraman Class
+ultraman = Ultraman("Gaia",500,"Merah Putih Emas Hitam")
+name = f"Ultraman {ultraman.name}" # Signing Ultraman instance attributes
+kuasa = ultraman.getKuasa() # Calling a method from Ultraman Class
 warna = ultraman.getWarna()
 
 ultraman.setWarna("Biru Hitam Emas")
@@ -55,5 +56,5 @@ print(warnaBaru)
 print(ultraman)
 
 # type
-print(type(Ultraman("Ultraman Gaia",500,"Merah Putih Emas Hitam")))
-print(type(int("12")))
+# print(type(Ultraman("Ultraman Gaia",500,"Merah Putih Emas Hitam")))
+# print(type(int("12")))

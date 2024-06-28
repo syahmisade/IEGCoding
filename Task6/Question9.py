@@ -22,5 +22,38 @@ def print_symmetric_pascals_triangle(rows):
         print(row_str.center(max_width))
     return " "
 
-inputNum = int(input("Enter a number for Pascal's triangle: "))
-print(print_symmetric_pascals_triangle(inputNum))
+# inputNum = int(input("Enter a number for Pascal's triangle: "))
+print(print_symmetric_pascals_triangle(11))
+# print(generate_pascals_triangle(11))
+
+def pascalsTri(r):
+    tri = []
+    
+    for row in range(r):
+        line = 11**row
+        
+        listLine = list(str(line))
+        tri.append(listLine)
+        
+    # print(tri)
+    return tri
+
+def pspt(r):
+    triangle = pascalsTri(r)
+    max_width = len(" ".join(map(str, triangle[-1]))) 
+    for row in triangle:
+        row_str = " ".join(map(str, row))
+        print(row_str.center(max_width))
+    return " "
+
+pspt(11)
+# pascalsTri(11)
+
+# contoh = " ".join(map(str,[123]) )
+# print(contoh)
+
+# con = list(map(str,[123]))
+# print(con)
+
+# cont = list(str(123))
+# print(cont)

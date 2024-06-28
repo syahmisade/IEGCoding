@@ -20,10 +20,10 @@ def print_symmetric_pascals_triangle(rows):
     for row in triangle:
         row_str = " ".join(map(str, row))
         print(row_str.center(max_width))
-    return " "
+
 
 # inputNum = int(input("Enter a number for Pascal's triangle: "))
-print(print_symmetric_pascals_triangle(11))
+print_symmetric_pascals_triangle(11)
 # print(generate_pascals_triangle(11))
 
 def pascalsTri(r):
@@ -46,9 +46,8 @@ def pspt(r):
         print(row_str.center(max_width))
     return " "
 
-pspt(11)
-# pascalsTri(11)
-
+# pspt(11)
+# print(pascalsTri(11))
 # contoh = " ".join(map(str,[123]) )
 # print(contoh)
 

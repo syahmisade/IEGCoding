@@ -226,8 +226,8 @@
 # y = int(input())
 
 
-rugby = ["prob","hooker","prob","scrumhalf","standoff","flanker","flanker","number8","inside","outside","winger","blindside"]
+# rugby = ["prob","hooker","prob","scrumhalf","standoff","flanker","flanker","number8","inside","outside","winger","blindside"]
 
-for i in rugby:
-    if i == "flanker":
-        print(f"flanker position in list rugby: {rugby.index(i)}")
+# for i in rugby:
+#     if i == "flanker":
+#         print(f"flanker position in list rugby: {rugby.index(i)}")

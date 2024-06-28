@@ -8,14 +8,14 @@ Why they are amicable numbers ?
 Sum of proper divisors of 220 = 1+2+4+5+10+11+20+22+44+55+110 = 284
 Sum of proper divisors of 284 = 1+2+4+71+142 = 220
 '''
-def amicable(lower,upper):
-    
-    def totalDivisor(i):
+def totalDivisor(i):
         sumDiv = 0
         for j in range(1,i):
             if i%j == 0:
                 sumDiv += j
         return sumDiv
+
+def amicable(lower,upper):
     
     listAmicable = []
     
@@ -29,3 +29,4 @@ def amicable(lower,upper):
     return listAmicable
 
 print(amicable(1,1000))
+# print(totalDivisor(6))

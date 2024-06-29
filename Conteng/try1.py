@@ -111,6 +111,7 @@ def compress_string(s):
     # Return the original string if the compressed one is not smaller
     return compressed_string if len(compressed_string) < len(s) else s
 
+
 # Example usage
 input_string = "aabcccccaaa"
 compressed_output = compress_string(input_string)

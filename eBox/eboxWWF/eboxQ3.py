@@ -28,5 +28,9 @@ The file has 11 lines
 def numLine(filename):
     with open(filename, 'r') as f:
         lines = f.readlines()
-        print("The file has", len(lines), "lines")
+        totalLine = len(lines)
+        print(f"The file has {totalLine} lines")
     return len(lines)
+
+
+numLine("input.txt")

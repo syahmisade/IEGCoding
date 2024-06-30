@@ -1,0 +1,1 @@
+A computer is a machine which helps us to calculate, simulate and store different scenarios. For example, in order to write an e-mail, instead of paper and pen first we use a software (or program) called wordprocessor which helps us enter sentences through keyboard (Input), computer's screen (output) to read, and modem (output/input) to send it to a distant relative, friend, etc.

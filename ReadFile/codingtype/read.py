@@ -2,6 +2,8 @@
 Working with files:
 - Can only assign 1 method to 1 var per time
     - Cannot have multiple method (including the var) in the same time
+
+File focus: Read only
 '''
 
 # Open a file

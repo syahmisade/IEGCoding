@@ -17,7 +17,8 @@ class Ultraman:
         self.name = name
         self.power = power
         self.__warna = warna
-        self.listnama = "" # Initialize it as a blank so that we can submit something
+        self.host = {} # Initialize it as a blank so that we can submit something
+        self.kaiju = [] # Initialize it as a blank so that we can submit something
     
     # This is a method => which have the same structure as functions
     def getKuasa(self):
@@ -34,6 +35,20 @@ class Ultraman:
     def __str__(self):
         statement = f"{self.name} is from {self.planet}"
         return statement
+    
+    def hostInfo(self):
+        print("Info about host:")
+        print(self.host["Name"])
+        print(self.host["Age"])
+        print(self.host["Gender"])
+    
+    def kaijuInfo(self):
+        print(f"Info about kaiju:")
+        for program in self.kaiju:
+            count = 1
+            print(f"Kaiju No.{count}: {program}")
+            count+=1
+        
 
 # --- Outside Class -----------------------------------------------------------------------------------------------------
     
@@ -43,8 +58,16 @@ name = f"Ultraman {ultraman.name}" # Signing Ultraman instance attributes
 kuasa = ultraman.getKuasa() # Calling a method from Ultraman Class
 warna = ultraman.getWarna()
 
+
 ultraman.setWarna("Biru Hitam Emas")
 warnaBaru = ultraman.getWarna()
+
+ultraman.host = {
+    "Name":"Syahmi",
+    "Age": 23,
+    "Gender":"Male"
+}
+ultraman.kaiju = ["Kaiju.1","Kaiju.2","Kaiju.3"]
 
 # Both printed different thing because both of the meaning is different
 print(ultraman.planet) # Based from the init(self) function => Instance Attributes
@@ -55,6 +78,8 @@ print(warna)
 print(warnaBaru)
 print(ultraman)
 
+ultraman.kaijuInfo()
+ultraman.hostInfo()
 # type
 # print(type(Ultraman("Ultraman Gaia",500,"Merah Putih Emas Hitam")))
 # print(type(int("12")))

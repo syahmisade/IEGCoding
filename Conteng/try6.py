@@ -20,14 +20,14 @@
 # Total students:60
 # Total faculties:15
 
-def multiVarFunc(department, totalStudents, totalFaculty):
-    print(f"Department:{department}")
-    print(f"Total students:{totalStudents}")
-    print(f"Total faculties:{totalFaculty}")
+# def multiVarFunc(department, totalStudents, totalFaculty):
+#     print(f"Department:{department}")
+#     print(f"Total students:{totalStudents}")
+#     print(f"Total faculties:{totalFaculty}")
 
 
-department = input("Enter department name:\n")
-totalStudents = int(input("Enter the number of total students:\n"))
-totalFaculty = int(input("Enter the number of total faculties:\n"))
-print("Details:")
-multiVarFunc(department, totalStudents, totalFaculty)
+# department = input("Enter department name:\n")
+# totalStudents = int(input("Enter the number of total students:\n"))
+# totalFaculty = int(input("Enter the number of total faculties:\n"))
+# print("Details:")
+# multiVarFunc(department, totalStudents, totalFaculty)

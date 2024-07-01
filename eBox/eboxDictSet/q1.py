@@ -31,6 +31,7 @@ def union(n):
         
         n-=1
     
+    
     return print(listNum)
 
 n = int(input())

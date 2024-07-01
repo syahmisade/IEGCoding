@@ -53,7 +53,7 @@ class Game():
         
         self.elements = ["Thunder","Fire","Water","Ghost","Ice"]
         self.pokemons = {
-            "jigglypuff":[Jigglypuff(f"P{i}",random.randint(50,100),self.elements[random.randint(0,4)],random.randint(75,100)) for i in range(0,random.randint(3,15))],
+            "jigglypuff":[Jigglypuff(f"J{i}",random.randint(50,100),self.elements[random.randint(0,4)],random.randint(75,100)) for i in range(0,random.randint(3,15))],
             "pikachu":[Pikachu(f"P{i}",random.randint(50,100),self.elements[0],random.randint(75,100)) for i in range(0,random.randint(5,20))]
         }
     
@@ -61,7 +61,7 @@ class Game():
         message = ""
         for pokemonname,pokemonlist in self.pokemons.items():
             for pokemons in pokemonlist:
-                message = message + pokemons.__str__() + "\n" + ("-"*20) # type: ignore
+                message = message + pokemons.__str__() + "\n" + ("-"*20) + "\n"# type: ignore
         return message
 
 #--- ROC -----------------------------------------------------------

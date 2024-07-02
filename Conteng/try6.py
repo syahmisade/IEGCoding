@@ -31,3 +31,14 @@
 # totalFaculty = int(input("Enter the number of total faculties:\n"))
 # print("Details:")
 # multiVarFunc(department, totalStudents, totalFaculty)
+
+numSheet = int(input("Enter total Number of sheets:"))
+
+attendanceSheet = []
+for i in range(numSheet):
+    registerNum = tuple(map(int, input().split(" ")))
+
+    attendanceSheet.append(registerNum)
+
+print("Attendance Sheets with Register Number:", tuple(attendanceSheet))
+print("Final sheet:", tuple(set.union(*map(set, attendanceSheet)))) 

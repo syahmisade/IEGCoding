@@ -1,5 +1,5 @@
 # List -> containt index [0,1,2,3,...]
-fruits = ["Apple","Orange","Mango","Banana","Grapes","Rambutan","Durian","Cempedak","Mangosteen"]
+fruits = ["Apple","Orange","Mango","Banana","Grapes","Rambutan","Durian","Cempedak","Mangosteen","Jagung"]
 
 print(f"The list of fruits: {fruits}")
 print("-"*50)

@@ -25,14 +25,22 @@ set([1, 2, 4, 5])
 '''
 def union(n):
     listNum = []
+    listLatest = []
     while n>0:
         a=input().split(",")
         listNum.append(a)
         
         n-=1
     
+    for i in listNum:
+        for j in i:
+            listLatest.append(int(j))
     
-    return print(listNum)
+    createSet = set(listLatest)
+    listCreateSet = sorted(list(createSet))
+    
+    print(f"set({listCreateSet})")
+    print(f"{listCreateSet[-2]}")
 
 n = int(input())
 union(n)

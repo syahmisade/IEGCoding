@@ -1,2 +1,3 @@
-alumni = Alumni("Abu","Harey",2022,"Software Engineering",1011101) # type: ignore
-# print(alumni)
+an)  # Output: Peter Parker
+# print(man.passp)  # Output: UK: E023405RT
+# print(man.__dict__)

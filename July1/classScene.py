@@ -15,6 +15,9 @@ class Cust:
         message = message + f"IC number: {self.ic}\n"
         message = message + f"Passport: {self.passp}\n"
         return message
+    
+    def setlastname(self,ln):
+        self.ln = ln
 
 class Passp:
     def __init__(self, negara, pnum):
@@ -35,8 +38,13 @@ passport = Passp("UK", "E023405RT")
 man.passp = passport # type: ignore
 dictMan = man.__dict__
 
+print(man)
+man.setlastname("Abu")
+print(man)
+# print(man.ln)
+
 # Display customer and their passport information
-print(man)  # Output: Peter Parker
-print(man.passp)  # Output: UK: E023405RT
-print(man.__dict__)
+# print(man)  # Output: Peter Parker
+# print(man.passp)  # Output: UK: E023405RT
+# print(man.__dict__)
 

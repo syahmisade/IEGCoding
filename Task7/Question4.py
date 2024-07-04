@@ -23,11 +23,37 @@ brown-green-violet should return 15 too, ignoring the third color
 '''
 
 class Resistor:
-    def __init__(self, color0, color1, colornone=""):
-        self.color0 = color0
-        self.color1 = color1
-        self.colorN = colornone
+    color_map = {
+        "black": 0,
+        "brown": 1,
+        "red": 2,
+        "orange": 3,
+        "yellow": 4,
+        "green": 5,
+        "blue": 6,
+        "violet": 7,
+        "grey": 8,
+        "white": 9
+    }
     
-    # def 
+    def __init__(self, colors):
+        self.colors = colors.split('-')
+    
+    def getResistanceValue(self):
+        fdigit = self.colors[0]
+        sdigit = self.colors[1]
         
+        newFdigit = self.color_map[fdigit]
+        newSdigit = self.color_map[sdigit]
+        
+        resistance = int(f"{newFdigit}{newSdigit}")
+        
+        return resistance
+
+inputResistor = input("Enter colour of the resistor: ")
+
+resistor = Resistor(inputResistor)
+
+print(resistor.getResistanceValue())
+
         

@@ -1,0 +1,3 @@
+Product|Quantity|Price
+Kasut|12|34.0
+Topi|12|43.0

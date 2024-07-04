@@ -24,10 +24,10 @@ print(x)
 y = add(12,34)
 print(y)
 
-from cuba import CarMaintenance
+# from cuba import CarMaintenance
 
-car1 = CarMaintenance("SUB0192","SUBARU","Camry")
+# car1 = CarMaintenance("SUB0192","SUBARU","Camry")
 
-car1.display()
-car1.addingTask()
-car1.displayList()
+# car1.display()
+# car1.addingTask()
+# car1.displayList()

@@ -8,7 +8,31 @@ Car maintenance module:
 - delete task
 - list task (display)
 - kalau dah settle task (awaiting,in progress,completed)
-- 
+-------------------------------------------------------------------------------------
+Sir Jegan info:
+- Maintenance Scheduling
+    - Regular
+    - Preventine
+    - Custom Schedule
+- Maintainance list
+- Cars that scheduale for this day,weeks,months
+- Maintenance Update
+    - awaiting,in progress,completed
+    - including the dates
+
+- create car.txt (without coding)
+input - processing - output
+ - input -> the list of cars in txt
+    - Which part have problems
+- Output -> maintainance.txt
+
+car.txt:
+no.plat|brand|model|warna
+- contoh: SUV2451|Honda|Civic|Black
+
+maintenance.txt:
+no.plat|problem|date|status
+- contoh: SUV2451|Oiled Change|29/07/2024|In progress
 
 '''
 class CarMaintenance:

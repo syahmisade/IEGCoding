@@ -8,7 +8,9 @@ def add(a,b):
 
 def minus(a,b):
     result = a-b
+    return result
 
 # Want to create a multipy function
 def multiply(a,b):
     result = a*b
+    return result

@@ -17,3 +17,33 @@ Sample Data:
   }
 }
 '''
+class Inventory:
+    def __init__(self, id, name, availableQuantity, price):
+        self.id = id
+        self.name = name
+        self.availableQuantity = availableQuantity
+        self.price = price
+        
+    def addItem(self, id, name, availableQuantity, price):
+        pass
+    
+    def updateItem(self):
+        pass
+    
+    def checkItem_details(self):
+        pass
+
+data = {
+  "97410": {
+    "name": "Television",
+    "availableQuantity": 20,
+    "price": 1455.99
+  },
+  "97411": {
+    "name": "Radio",
+    "availableQuantity": 32,
+    "price": 654.25
+  }
+}
+
+

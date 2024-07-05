@@ -77,20 +77,6 @@ def main(inventory):
       print("Bye bye")
       break
 
-data = {
-  "97410": {
-    "name": "Television",
-    "availableQuantity": 20,
-    "price": 1455.99
-  },
-  "97411": {
-    "name": "Radio",
-    "availableQuantity": 32,
-    "price": 654.25
-  }
-}
-inventory = Inventory(data)
-
 if __name__ == "__main__":
   
   data = {

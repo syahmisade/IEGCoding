@@ -29,7 +29,6 @@ class ParenthesesValidator:
             return f"Valid"
         return f"Invalid"
 
-
 validator = ParenthesesValidator()
 prths = input("Enter parentheses to be validate: ")
 print(validator.is_valid(prths))

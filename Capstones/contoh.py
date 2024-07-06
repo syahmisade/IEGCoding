@@ -83,7 +83,7 @@ def printProduct(filename):
         for index, line in enumerate(lines):
             product, quantity, price = line.strip().split("|")
             if (index == 0):
-                print(f"{"No: ":<5}{product:20}{quantity:>20}{price:>20}")  
+                print(f"{"No: ":<5}{product:20}{quantity:>20}{price:>20}")
                 print("=" * 80)
             else:
                 print(

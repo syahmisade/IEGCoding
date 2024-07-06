@@ -25,3 +25,21 @@ Enter the scores
 r 
 Type Error Exception
 '''
+
+
+n = int(input("Enter the number of matches\n"))
+count = 0
+total = 0
+try:
+    print("Enter the scores")
+    while count < n:
+        score = input()
+        score = int(score)
+        total += score
+
+        count += 1
+
+    avg = total/n
+    print(f"Batting average: {avg:.2f}")
+except ValueError:
+    print("Type Error Exception")

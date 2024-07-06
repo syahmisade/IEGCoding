@@ -22,17 +22,14 @@ class ParenthesesValidator:
                 stack.append(char)
             elif char in self.pair_map.keys():
                 if stack == [] or self.pair_map[char] != stack.pop():  # Check if the closing Parthss is correct
-                    return False
+                    return f"Invalid"
             else:
-                # Invalid character encountered
-                return False
-        return True
+                return f"Invalid"
+        if stack == []:
+            return f"Valid"
+        return f"Invalid"
 
 
-# Example usage
 validator = ParenthesesValidator()
-print(validator.is_valid("()"))       # True
-print(validator.is_valid("()[]{}"))   # True
-print(validator.is_valid("(]"))       # False
-print(validator.is_valid("({[)]"))    # False
-print(validator.is_valid("{{{"))      # False
+prths = input("Enter parentheses to be validate: ")
+print(validator.is_valid(prths))

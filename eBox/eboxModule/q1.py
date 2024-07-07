@@ -17,3 +17,15 @@ Sample Input 2:
 Sample Output2:
 0 1 1 2 3 5
 '''
+import math
+
+
+def fibonacci(n):
+    fib = [0, 1]
+    for i in range(2, n):
+        fib.append(fib[i-1]+fib[i-2])
+    return fib
+
+
+num = int(input())
+print(" ".join(map(str, fibonacci(num))))

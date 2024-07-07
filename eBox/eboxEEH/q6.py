@@ -36,7 +36,8 @@ class CustomException(Exception):
 
 
 def vote(name, age):
-    pass
+    print(f"Voter name: {name}")
+    print(f"Voter age: {age}")
 
 
 name = input("Enter the Name:\n")

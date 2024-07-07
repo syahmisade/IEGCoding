@@ -31,7 +31,7 @@ CustomException: InvalidAgeRangeException
 '''
 
 
-class CustomException(Exception):
+class CustomError(Exception):
     pass
 
 
@@ -40,6 +40,48 @@ def vote(name, age):
     print(f"Voter age: {age}")
 
 
-name = input("Enter the Name:\n")
-age = int(input("Enter the age:\n"))
-vote(name, age)
+try:
+    name = input("Enter the Name\n")
+    age = int(input("Enter the age\n"))
+
+    if age < 18:
+        raise CustomError("CustomException: InvalidAgeRangeException")
+
+    vote(name, age)
+except CustomError as e:
+    error_message = str(e)
+    print(error_message)
+
+
+# class CustomError(Exception):
+#     pass
+
+
+# def main():
+#     try:
+#         name = input("Enter the Name\n")
+#         age = int(input("Enter the age\n"))
+
+#         if age < 18:
+#             raise CustomError("CustomException: InvalidAgeRangeException")
+
+#         print(f"Voter name: {name}")  # Function
+#         print(f"Voter age: {age}")
+
+#     except CustomError as e:
+#         error_message = str(e)
+#         if "CustomException" not in error_message:
+#             raise CustomError(
+#                 "CustomException: CustomException keyword not found")
+
+#         # Count occurrences of "CustomException"
+#         count = error_message.count("CustomException")  # Method
+#         if count < 1 or count > 3:
+#             raise CustomError(
+#                 "CustomException: Invalid count of CustomException keyword")
+
+#         print(error_message)
+
+
+# if __name__ == "__main__":
+#     main()

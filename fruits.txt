@@ -1,4 +1,5 @@
 Product|Quantity|Price
 Kasut|12|34.0
-|34|43.0
+Tudung|43|12.0
 Botol|12|23.0
+Speaker|34|54.0

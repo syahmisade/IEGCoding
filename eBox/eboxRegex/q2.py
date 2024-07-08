@@ -19,3 +19,14 @@ Not Accepted
 '''
 import re
 
+
+def check_offer_code(s):
+    vowels = 'aeiou'
+    for vowel in vowels:
+        if not re.search(vowel, s):
+            return "Not Accepted"
+    return "Accepted"
+
+
+string = input()
+print(check_offer_code(string))

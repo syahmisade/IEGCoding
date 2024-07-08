@@ -8,3 +8,4 @@ UV678WX,Chevrolet,Malibu,2021,Gray,regular,12-12-2025,qwe,qwe,Awaiting
 GH567IJ,Toyota,Corolla,2015,Red,preventive,12-09-2021,Tayar,Tayar pancit,Awaiting
 UV789WX,Chevrolet,Spark,2018,Purple,custom,12-07-2024,Side mirror,Accident,Awaiting
 KL890MN,Honda,Civic,2018,Blue,preventive,12-06-2024,Brake,Accident,Awaiting
+QR456ST,Honda,Fit,2020,Yellow,regular,12-12-2024,Cermin,Accident,Awaiting

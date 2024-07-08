@@ -1,0 +1,6 @@
+No.plat,Brand,Model,Year,Colour,Type,Date,Parts,Reason,Updates
+AB123CD,Toyota,Corolla,2015,Red,preventive,1234-12-12,qwer,qwer,Awaiting
+EF456GH,Honda,Civic,2018,Blue,preventive,2024-12-12,Bumper,Accident,Awaiting
+IJ789KL,Ford,Focus,2020,Black,regular,12-12-2024,Wind shield,Accident,Awaiting
+MN012OP,Toyota,Camry,2017,White,preventive,12-12-2024,Tires,Accident,Awaiting
+YZ910AB,BMW,3 Series,2022,Black,preventive,12-12-2014,qwert,qwer,Awaiting

@@ -1,0 +1,2 @@
+Product|Quantity|Price
+Botol|12|21.0

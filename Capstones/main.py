@@ -1,6 +1,6 @@
 '''
 Main file:
-Function:
+Function: (9)
 - collectdata() 
     - ONLY collect data from cars.txt
 - keyboardInput()
@@ -11,6 +11,14 @@ Function:
     - semua pasal maintenance
 - displaycars() 
     - display cars data
+- collectCM()
+    - collect data from maintenance.txt
+- displayCM()
+    - display car maintenance list
+- clear_screen()
+    - untuk clear screen
+- main()
+    - main function
 '''
 from datetime import datetime
 import os

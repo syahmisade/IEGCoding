@@ -4,3 +4,7 @@ EF456GH,Honda,Civic,2018,Blue,preventive,2024-12-12,Bumper,Accident,Awaiting
 IJ789KL,Ford,Focus,2020,Black,regular,12-12-2024,Wind shield,Accident,Awaiting
 MN012OP,Toyota,Camry,2017,White,preventive,12-12-2024,Tires,Accident,Awaiting
 YZ910AB,BMW,3 Series,2022,Black,preventive,12-12-2014,qwert,qwer,Awaiting
+UV678WX,Chevrolet,Malibu,2021,Gray,regular,12-12-2025,qwe,qwe,Awaiting
+GH567IJ,Toyota,Corolla,2015,Red,preventive,12-09-2021,Tayar,Tayar pancit,Awaiting
+UV789WX,Chevrolet,Spark,2018,Purple,custom,12-07-2024,Side mirror,Accident,Awaiting
+KL890MN,Honda,Civic,2018,Blue,preventive,12-06-2024,Brake,Accident,Awaiting

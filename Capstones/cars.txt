@@ -1,7 +1,3 @@
 No.plat,Brand,Model,Year,Colour
 QR345ST,Honda,Accord,2019,Silver
-UV678WX,Chevrolet,Malibu,2021,Gray
-GH567IJ,Toyota,Corolla,2015,Red
-KL890MN,Honda,Civic,2018,Blue
 AB234CD,Audi,A6,2019,Gray
-UV789WX,Chevrolet,Spark,2018,Purple

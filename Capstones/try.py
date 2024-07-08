@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 
 def collectdata():
     details = {}
@@ -132,7 +133,76 @@ def displaycars():
     for no_plat, car_details in details.items():
         print(f"{no_plat:10}{car_details['Brand']:12}{car_details['Model']:10}{car_details['Year']:<6}{car_details['Color']:10}")
 
+def collectCM():
+    details = {}
+    headers = []
+    
+    with open('maintenance.txt', 'r') as filehandler:
+        lines = filehandler.readlines()
+    for index, line in enumerate(lines):
+        if index > 0:
+            no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split(',')
+            details[no_plat] = {
+                "Brand": brand,
+                "Model": model,
+                "Year": int(tahun),  # Convert year to integer
+                "Color": warna,
+                "Type": jenis,
+                "Date": tarikh,
+                "Parts": parts,
+                "Reason": sebab,
+                "Update": update
+            }
+        elif index == 0:
+            headers = line.strip().split(',')
+    
+    return headers, details, lines
 
+def displayCM():
+    headers, details, lines = collectCM()
+    
+    no_platH, brandH, modelH, tahunH, warnaH, jenisH, tarikhH, partsH, sebabH, updateH = headers
+    
+    print(f"{no_platH:12}{jenisH:12}{tarikhH:12}{partsH:15}{sebabH:20}{updateH:12}")
+    print("=" * 73)
+    for no_plat, car_details in details.items():
+        print(f"{no_plat:12}{car_details['Type']:12}{car_details['Date']:12}{car_details['Parts']:15}{car_details['Reason']:20}{car_details['Update']:12}")
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def main():
+    clear_screen()
+    print("=" * 50)
+    print("\tWelcome to Car Maintenance System")
+    print("=" * 50)
+    print("1. Display cars that needed maintenance")
+    print("2. Add a car into maintenance list")
+    print("3. Update status car maintenance")
+    print("4. Display schedule service")
+    print("0. Exit")
+    print("=" * 50)
+    choice = -1
+    while choice != 0:
+        choice = keyboardInput(int, "Choice (1, 2, 3, 4, 0): ", "Choice must be an integer")
+        if choice == 1:
+            clear_screen()
+            displayCM()
+        elif choice == 2:
+            clear_screen()
+            maintenanceMenu()
+        elif choice == 3:
+            pass
+        elif choice == 4:
+            pass
+        elif choice == 0:
+            break
+        else:
+            print("Invalid choice. Please choose from the options.")
+            continue
+
+# displayCM()
 # displaycars()
 # maintenanceMenu()
+if __name__ == "__main__":
+    main()

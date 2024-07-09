@@ -1,5 +1,4 @@
 No.plat|Brand|Model|Year|Colour
-YZ910AB|BMW|3 Series|2022|Black
 CD234EF|Audi|A4|2016|Blue
 GH567IJ|Toyota|Corolla|2015|Red
 KL890MN|Honda|Civic|2018|Blue

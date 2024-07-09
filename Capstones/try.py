@@ -237,7 +237,7 @@ def menuBeforeMaintenance():
         print("Menu:")
         print("1. Display Selected Cars")
         print("2. Update Maintenance Status")
-        print("3. Exit")
+        print("3. Main Menu")
         choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
         if choice == 1:
             display_selected_cars(no_plat)
@@ -312,6 +312,19 @@ def updateCM(no_plat):
     else:
         print("Invalid number plate. Please enter a valid number plate.")
 
+def displayCMS():
+    headers, details, lines = collectCM()
+    
+    no_platH, brandH, modelH, tahunH, warnaH, jenisH, tarikhH, partsH, sebabH, updateH = headers
+    
+    # Convert date strings to datetime objects and sort the details by date in descending order
+    sorted_details = sorted(details.items(), key=lambda item: datetime.strptime(item[1]["Date"], '%d-%m-%Y'), reverse=True)
+
+    print(f"{no_platH:12}{jenisH:12}{tarikhH:12}{partsH:15}{sebabH:20}{updateH:12}")
+    print("=" * 73)
+    for no_plat, car_details in sorted_details:
+        print(f"{no_plat:12}{car_details['Type']:12}{car_details['Date']:12}{car_details['Parts']:15}{car_details['Reason']:20}{car_details['Updates']:12}")
+
 def main():
     clear_screen()
     print("=" * 50)
@@ -336,9 +349,11 @@ def main():
             clear_screen()
             menuBeforeMaintenance()
         elif choice == 4:
-            pass
+            clear_screen()
+            displayCMS()
         elif choice == 0:
-            break
+            clear_screen()  
+            exit()
         else:
             print("Invalid choice. Please choose from the options.")
             continue

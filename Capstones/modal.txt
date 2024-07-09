@@ -1,21 +1,21 @@
-No.plat,Brand,Model,Year,Colour
-AB123CD,Toyota,Corolla,2015,Red
-EF456GH,Honda,Civic,2018,Blue
-IJ789KL,Ford,Focus,2020,Black
-MN012OP,Toyota,Camry,2017,White
-QR345ST,Honda,Accord,2019,Silver
-UV678WX,Chevrolet,Malibu,2021,Gray
-YZ910AB,BMW,3 Series,2022,Black
-CD234EF,Audi,A4,2016,Blue
-GH567IJ,Toyota,Corolla,2015,Red
-KL890MN,Honda,Civic,2018,Blue
-OP123QR,Ford,Focus,2020,Black
-ST456UV,BMW,5 Series,2021,White
-WX789YZ,Chevrolet,Impala,2017,Silver
-AB234CD,Audi,A6,2019,Gray
-EF567GH,Mercedes,C Class,2022,Black
-IJ890KL,Ford,Fusion,2016,Blue
-MN123OP,Toyota,Prius,2021,Green
-QR456ST,Honda,Fit,2020,Yellow
-UV789WX,Chevrolet,Spark,2018,Purple
-YZ012AB,BMW,X5,2017,Black
+No.plat|Brand|Model|Year|Colour
+AB123CD|Toyota|Corolla|2015|Red
+EF456GH|Honda|Civic|2018|Blue
+IJ789KL|Ford|Focus|2020|Black
+MN012OP|Toyota|Camry|2017|White
+QR345ST|Honda|Accord|2019|Silver
+UV678WX|Chevrolet|Malibu|2021|Gray
+YZ910AB|BMW|3 Series|2022|Black
+CD234EF|Audi|A4|2016|Blue
+GH567IJ|Toyota|Corolla|2015|Red
+KL890MN|Honda|Civic|2018|Blue
+OP123QR|Ford|Focus|2020|Black
+ST456UV|BMW|5 Series|2021|White
+WX789YZ|Chevrolet|Impala|2017|Silver
+AB234CD|Audi|A6|2019|Gray
+EF567GH|Mercedes|C Class|2022|Black
+IJ890KL|Ford|Fusion|2016|Blue
+MN123OP|Toyota|Prius|2021|Green
+QR456ST|Honda|Fit|2020|Yellow
+UV789WX|Chevrolet|Spark|2018|Purple
+YZ012AB|BMW|X5|2017|Black

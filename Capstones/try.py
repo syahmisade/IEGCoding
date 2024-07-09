@@ -1,6 +1,26 @@
 from datetime import datetime
 import os
 
+def keyboardInput(input_type, prompt, error_message):
+    while True:
+        try:
+            return input_type(input(prompt))
+        except ValueError:
+            print(error_message)
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+def validate_date_format(date_string):
+    try:
+        # datetime.strptime(date_string, '%d-%m-%Y')
+        if datetime.strptime(date_string, '%d-%m-%Y').date() >= datetime.now().date():
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
+
 def collectdata():
     details = {}
     headers = []
@@ -18,25 +38,7 @@ def collectdata():
             }
         elif index == 0:
             headers = line.strip().split('|')
-    
     return headers, details, lines
-
-def keyboardInput(input_type, prompt, error_message):
-    while True:
-        try:
-            return input_type(input(prompt))
-        except ValueError:
-            print(error_message)
-
-def validate_date_format(date_string):
-    try:
-        # datetime.strptime(date_string, '%d-%m-%Y')
-        if datetime.strptime(date_string, '%d-%m-%Y').date() >= datetime.now().date():
-            return True
-        else:
-            return False
-    except ValueError:
-        return False
 
 def maintenanceMenu():
     headers, details, lines = collectdata()
@@ -82,7 +84,7 @@ def maintenanceMenu():
             elif choice == 3:
                 type_of_maintenance = "custom"
             elif choice == 0:
-                return None
+                main()
             else:
                 print("Invalid choice. Please choose from the options.")
                 continue
@@ -115,8 +117,6 @@ def maintenanceMenu():
                     f"{type_of_maintenance}|{date_of_maintenance}|{parts_to_fix}|{reason_for_maintenance}|{updates_of_maintenance}\n"
                 )
             
-            print(f"Car with license plate {no_plat} has been added to maintenance.txt.")
-            
             # Remove the car from the lines list
             updated_lines = [line for line in lines if not line.startswith(no_plat)]
             
@@ -125,21 +125,10 @@ def maintenanceMenu():
                 for line in updated_lines:
                     filehandler.write(line)
             
-            print(f"Car with license plate {no_plat} has been removed from cars.txt.")
+            print(f"Car with license plate {no_plat} has been added to maintenance list.")
             break
     else:
         print(f"No car with license plate {no_plat} found.")
-
-def displaycars():
-    headers, details, lines = collectdata()
-
-    no_platH, brandH, modelH, tahunH, warnaH = headers
-    
-    print(f"{no_platH:10}{brandH:12}{modelH:10}{tahunH:<6}{warnaH:10}")
-    print("=" * 50)
-    
-    for no_plat, car_details in details.items():
-        print(f"{no_plat:10}{car_details['Brand']:12}{car_details['Model']:10}{car_details['Year']:<6}{car_details['Color']:10}")
 
 def collectCM():
     details = {}
@@ -218,9 +207,6 @@ def displayCM():
             car_details["Updates"]
         ))
 
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
 def menuBeforeMaintenance():
     displayCM()
     print("=" * 80)
@@ -244,7 +230,6 @@ def menuBeforeMaintenance():
         elif choice == 2:
             updateCM(no_plat)
         elif choice == 3:
-            print ("We will go back to Main Menu.")
             main()
         else:
             print("Invalid choice. Please enter a valid option.")

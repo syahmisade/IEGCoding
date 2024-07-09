@@ -18,4 +18,3 @@ IJ890KL|Ford|Fusion|2016|Blue
 MN123OP|Toyota|Prius|2021|Green
 QR456ST|Honda|Fit|2020|Yellow
 UV789WX|Chevrolet|Spark|2018|Purple
-YZ012AB|BMW|X5|2017|Black

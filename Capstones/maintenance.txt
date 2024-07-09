@@ -3,3 +3,4 @@ IJ890KL|Ford|Fusion|2016|Blue|preventive|12-12-2024|Whipper,Bumper,Side Mirror|A
 YZ910AB|BMW|3 Series|2022|Black|preventive|12-12-2024|Tires|Accident|In Progress
 ST456UV|BMW|5 Series|2021|White|custom|12-12-2024|Mirror|Accident|In Progress
 CD234EF|Audi|A4|2016|Blue|preventive|12-12-2024|Cermin|Accident|Awaiting
+YZ012AB|BMW|X5|2017|Black|preventive|12-09-2024|Cermin|Cermin pecah|Completed

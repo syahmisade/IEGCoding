@@ -1,26 +1,4 @@
-'''
-Main file:
-Function: (9)
-- collectdata() 
-    - ONLY collect data from cars.txt
-- keyboardInput()
-    - return error if input wrong type of data
-- validate_date_format()
-    - validate tarikh yang di keyin
-- maintenanceMenu()
-    - semua pasal maintenance
-- displaycars() 
-    - display cars data
-- collectCM()
-    - collect data from maintenance.txt
-- displayCM()
-    - display car maintenance list
-- clear_screen()
-    - untuk clear screen
-- main()
-    - main function
-'''
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 def collectdata():
@@ -163,7 +141,7 @@ def collectCM():
         lines = filehandler.readlines()
     for index, line in enumerate(lines):
         if index > 0:
-            no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split(',')
+            no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split('|')
             details[no_plat] = {
                 "Brand": brand,
                 "Model": model,
@@ -176,7 +154,7 @@ def collectCM():
                 "Update": update
             }
         elif index == 0:
-            headers = line.strip().split(',')
+            headers = line.strip().split('|')
     
     return headers, details, lines
 
@@ -193,6 +171,53 @@ def displayCM():
     for no_plat, car_details in sorted_details:
         print(f"{no_plat:12}{car_details['Type']:12}{car_details['Date']:12}{car_details['Parts']:15}{car_details['Reason']:20}{car_details['Update']:12}")
 
+def filterCMByDateRange(start_date, end_date):
+    headers, details, lines = collectCM()
+    
+    no_platH, brandH, modelH, tahunH, warnaH, jenisH, tarikhH, partsH, sebabH, updateH = headers
+    
+    # Filter records within the specified date range
+    filtered_details = {
+        no_plat: car_details
+        for no_plat, car_details in details.items()
+        if start_date <= datetime.strptime(car_details["Date"], '%d-%m-%Y') <= end_date
+    }
+    
+    sorted_details = sorted(filtered_details.items(), key=lambda item: datetime.strptime(item[1]["Date"], '%d-%m-%Y'))
+
+    print(f"{no_platH:12}{jenisH:12}{tarikhH:12}{partsH:15}{sebabH:20}{updateH:12}")
+    print("=" * 73)
+    for no_plat, car_details in sorted_details:
+        print(f"{no_plat:12}{car_details['Type']:12}{car_details['Date']:12}{car_details['Parts']:15}{car_details['Reason']:20}{car_details['Update']:12}")
+
+def displayThisWeekCM():
+    today = datetime.now()
+    start_of_week = today - timedelta(days=today.weekday())
+    end_of_week = start_of_week + timedelta(days=6)
+    filterCMByDateRange(start_of_week, end_of_week)
+
+def displaythisMonthCM():
+    today = datetime.now()
+    start_of_month = today.replace(day=1)
+    if today.month == 12:
+        end_of_month = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
+    else:
+        end_of_month = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
+    filterCMByDateRange(start_of_month, end_of_month)
+
+def displayNextMonthCM():
+    today = datetime.now()
+    if today.month == 12:
+        start_of_next_month = today.replace(year=today.year + 1, month=1, day=1)
+        end_of_next_month = start_of_next_month.replace(year=today.year + 1, month=2, day=1) - timedelta(days=1)
+    else:
+        start_of_next_month = today.replace(month=today.month + 1, day=1)
+        if today.month == 11:
+            end_of_next_month = today.replace(year=today.year, month=12, day=31)
+        else:
+            end_of_next_month = today.replace(month=today.month + 2, day=1) - timedelta(days=1)
+    filterCMByDateRange(start_of_next_month, end_of_next_month)
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -201,10 +226,10 @@ def main():
     print("=" * 50)
     print("\tWelcome to Car Maintenance System")
     print("=" * 50)
-    print("1. Display cars that needed maintenance")
-    print("2. Add a car into maintenance list")
-    print("3. Update status car maintenance")
-    print("4. Display schedule service")
+    print("1. Display all maintenance records")
+    print("2. Add a car to maintenance list")
+    print("3. Display weekly maintenance schedule")
+    print("4. Display monthly maintenance schedule")
     print("0. Exit")
     print("=" * 50)
     choice = -1
@@ -217,14 +242,21 @@ def main():
             clear_screen()
             maintenanceMenu()
         elif choice == 3:
-            pass
+            clear_screen()
+            displayThisWeekCM()
         elif choice == 4:
-            pass
+            clear_screen()
+            displaythisMonthCM()
         elif choice == 0:
             break
         else:
             print("Invalid choice. Please choose from the options.")
             continue
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+displayThisWeekCM()
+print()
+displaythisMonthCM()
+print()
+displayNextMonthCM()

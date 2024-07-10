@@ -1,10 +1,16 @@
 No.plat|Brand|Model|Year|Colour|Type|Date|Parts|Reason|Updates
-IJ890KL|Ford|Fusion|2016|Blue|preventive|12-12-2024|Whipper,Bumper,Side Mirror|Accident|In Progress
-YZ910AB|BMW|3 Series|2022|Black|preventive|12-12-2024|Tires|Accident|In Progress
-ST456UV|BMW|5 Series|2021|White|custom|12-12-2024|Mirror|Accident|In Progress
-CD234EF|Audi|A4|2016|Blue|preventive|12-12-2024|Cermin|Accident|Completed
-YZ012AB|BMW|X5|2017|Black|preventive|12-09-2024|Cermin|Cermin pecah|Completed
-UV789WX|Chevrolet|Spark|2018|Purple|preventive|12-01-2025|Oil|Engine masalah|In Progress
-WX789YZ|Chevrolet|Impala|2017|Silver|regular|23-09-2024|bla|bla|Completed
-QR456ST|Honda|Fit|2020|Yellow|regular|13-12-2024|Bumper|Accident|In Progress
-MN123OP|Toyota|Prius|2021|Green|preventive|11-07-2024|Cermin|Accident|Completed
+YZ910AB|BMW|3 Series|2022|Black|preventive|14-08-2024|Tires|Accident|Awaiting
+ST456UV|BMW|5 Series|2021|White|custom|12-08-2024|Mirror|Accident|In Progress
+CD234EF|Audi|A4|2016|Blue|regular|12-07-2024|Body kemek|Accident|In Progress
+YZ012AB|BMW|X5|2017|Black|preventive|12-07-2024|Cermin|Cermin pecah|Completed
+UV789WX|Chevrolet|Spark|2018|Purple|preventive|14-07-2024|Oil|Engine masalah|In Progress
+WX789YZ|Chevrolet|Impala|2017|Silver|regular|23-07-2024|bla|bla|Awaiting
+QR456ST|Honda|Fit|2020|Yellow|regular|13-07-2024|Bumper|Accident|In Progress
+MN123OP|Toyota|Prius|2021|Green|preventive|15-07-2024|Cermin|Accident|Completed
+UV678WX|Chevrolet|Malibu|2021|Gray|preventive|12-08-2024|Cermin pecah|Accident|Completed
+CD234EF|Audi|A4|2016|Blue|regular|12-07-2024|Body kemek|Accident|Awaiting
+IJ890KL|Ford|Fusion|2016|Blue|preventive|12-07-2024|Side mirror|Accident|Awaiting
+EF567GH|Mercedes|C Class|2022|Black|regular|19-08-2024|Bonet|tak tahu la dok|Completed
+AB234CD|Audi|A6|2019|Gray|regular|12-12-2024|Side mirror|Accident|In Progress
+ST456UV|BMW|5 Series|2021|White|regular|12-08-2024|awdadasd|fadawdw|Awaiting
+GH567IJ|Toyota|Corolla|2015|Red|regular|12-08-2024|adawdawdasd|wadadasfas|Awaiting

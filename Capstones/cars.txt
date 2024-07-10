@@ -14,4 +14,3 @@ ST456UV|BMW|5 Series|2021|White
 AB234CD|Audi|A6|2019|Gray
 EF567GH|Mercedes|C Class|2022|Black
 IJ890KL|Ford|Fusion|2016|Blue
-MN123OP|Toyota|Prius|2021|Green

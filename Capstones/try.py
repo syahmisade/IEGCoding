@@ -339,7 +339,6 @@ def displayFilteredCM(filter_criteria=None):
         ))
     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
 
-
 def menuBeforeMaintenance():
     while True:
         displayFilteredCM()

@@ -13,7 +13,6 @@ def clear_screen():
 
 def validate_date_format(date_string):
     try:
-        # datetime.strptime(date_string, '%d-%m-%Y')
         if datetime.strptime(date_string, '%d-%m-%Y').date() >= datetime.now().date():
             return True
         else:
@@ -33,7 +32,7 @@ def collectdata():
             details[no_plat] = {
                 "Brand": brand,
                 "Model": model,
-                "Year": int(tahun),  # Convert year to integer
+                "Year": int(tahun),
                 "Color": warna
             }
         elif index == 0:
@@ -143,7 +142,7 @@ def collectCM():
                 details[no_plat] = {
                     "Brand": brand,
                     "Model": model,
-                    "Year": int(tahun),  # Convert year to integer
+                    "Year": int(tahun),
                     "Colour": warna,
                     "Type": jenis,
                     "Date": tarikh,
@@ -156,13 +155,23 @@ def collectCM():
     
     return headers, details, lines if 'lines' in locals() else []
 
-def displayCM():
+def displayCM(filter_criteria=None):
     headers, details, lines = collectCM()
 
     if not headers or not details:
         print("No car maintenance records found.")
         return
-    
+
+    # Apply filter criteria if any
+    if filter_criteria:
+        filtered_details = {k: v for k, v in details.items() if all(str(v.get(key, '')).lower() == str(value).lower() for key, value in filter_criteria.items())}
+    else:
+        filtered_details = details
+
+    if not filtered_details:
+        print("No car maintenance records match the filter criteria.")
+        return
+
     # Set minimum column widths
     min_widths = {
         "No.plat": 9,
@@ -179,7 +188,7 @@ def displayCM():
 
     # Calculate the necessary column widths based on content
     column_widths = min_widths.copy()
-    for no_plat, car_details in details.items():
+    for no_plat, car_details in filtered_details.items():
         for header, value in car_details.items():
             column_widths[header] = max(column_widths[header], len(str(value)))
         column_widths["No.plat"] = max(column_widths["No.plat"], len(no_plat))
@@ -193,7 +202,7 @@ def displayCM():
     print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
 
     # Print the rows
-    for no_plat, car_details in details.items():
+    for no_plat, car_details in filtered_details.items():
         print(row_format.format(
             no_plat,
             car_details["Brand"],
@@ -206,6 +215,41 @@ def displayCM():
             car_details["Reason"],
             car_details["Updates"]
         ))
+
+def filtersearch():
+    clear_screen()
+    print("Filter Search for Maintenance Records")
+    
+    # Ask user which parts they want to filter
+    print("Which part would you like to filter?")
+    print("1. Number Plate")
+    print("2. Brand")
+    print("3. Model")
+    print("4. Year")
+    print("5. Colour")
+    print("0. Main Menu")
+    choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/0): ", "Choice must be an integer")
+    
+    filter_criteria = {}
+    
+    if choice == 1:
+        filter_criteria["No.plat"] = input("Enter the number plate: ").strip()
+    elif choice == 2:
+        filter_criteria["Brand"] = input("Enter the brand: ").strip()
+    elif choice == 3:
+        filter_criteria["Model"] = input("Enter the model: ").strip()
+    elif choice == 4:
+        filter_criteria["Year"] = input("Enter the year: ").strip()
+    elif choice == 5:
+        filter_criteria["Colour"] = input("Enter the colour: ").strip()
+    elif choice == 0:
+        main()
+    else:
+        print("Invalid choice.")
+        return
+    
+    displayCM(filter_criteria)
+
 
 def menuBeforeMaintenance():
     displayCM()
@@ -247,7 +291,7 @@ def display_selected_cars(no_plat):
 
         menuBeforeMaintenance()
     else:
-            print("Invalid number plate. Please enter a valid number plate.")
+        print("Invalid number plate. Please enter a valid number plate.")
 
 def updateCM(no_plat):
     headers, details, lines = collectCM()
@@ -321,9 +365,10 @@ def main():
         print("2. Add a car into maintenance list")
         print("3. Update status car maintenance")
         print("4. Display schedule service")
+        print("5. Filter search")
         print("0. Exit")
         print("=" * 50)
-        choice = keyboardInput(int, "Choice (1, 2, 3, 4, 0): ", "Choice must be an integer")
+        choice = keyboardInput(int, "Choice (1, 2, 3, 4, 5, 0): ", "Choice must be an integer")
         if choice == 1:
             clear_screen()
             displayCM()
@@ -336,6 +381,9 @@ def main():
         elif choice == 4:
             clear_screen()
             displayCMS()
+        elif choice == 5:
+            clear_screen()
+            filtersearch()
         elif choice == 0:
             clear_screen()  
             exit()

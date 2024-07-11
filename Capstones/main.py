@@ -505,7 +505,7 @@ def menuCMS():
             choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/0): ", "Choice must be an integer")
             
             if choice == 1:
-                no_plat = input("Enter the number plate of the car: ").strip()
+                no_plat = input("Enter the number plate of the car: ").upper().strip()
                 if not no_plat:
                     clear_screen()
                     print("\nNo car plate entered. Please try again.\n")
@@ -561,7 +561,7 @@ def menuBeforeMaintenance():
             choice = keyboardInput(int, "Enter your choice (1/2/3/0): ", "Choice must be an integer")
 
             if choice == 1:
-                no_plat_1 = input("Enter the number plate of the car for display: ").strip()
+                no_plat_1 = input("Enter the number plate of the car for display: ").upper().strip()
                 if not no_plat_1:
                     clear_screen()
                     print("\nNo car plate entered. Please try again.\n")
@@ -573,7 +573,7 @@ def menuBeforeMaintenance():
                 display_selected_cars(no_plat_1)
                 
             elif choice == 2:
-                no_plat_2 = input("Enter the number plate of the car for update: ").strip()
+                no_plat_2 = input("Enter the number plate of the car for update: ").upper().strip()
                 if not no_plat_2:
                     clear_screen()
                     print("\nNo car plate entered. Please try again.\n")
@@ -618,7 +618,7 @@ def maintenanceMenu():
         print(f"{no_plat:10}{car_details['Brand']:12}{car_details['Model']:10}{car_details['Year']:<6}{car_details['Color']:10}")
     
     # Ask user to pick a car by license plate number
-    no_plat = input(f"\nEnter the license plate number of the car to put in maintenance: ").strip()
+    no_plat = input(f"\nEnter the license plate number of the car to put in maintenance: ").upper().strip()
     clear_screen()
     
     # Check if the chosen license plate exists in the details

@@ -1,4 +1,10 @@
 No.plat|Brand|Model|Year|Colour|Type|Date|Parts|Reason|Updates
-EF567GH|Mercedes|C Class|2022|Black|regular|12-07-2024|Engine oil|Mileage|Awaiting
-YZ012AB|BMW|X5|2017|Black|preventive|14-07-2024|Side mirror|Accident|Awaiting
+EF567GH|Mercedes|C Class|2022|Black|regular|12-07-2024|Engine oil|Mileage|In Progress
+YZ012AB|BMW|X5|2017|Black|preventive|14-07-2024|Side mirror|Accident|In Progress
 ST456UV|BMW|5 Series|2021|White|custom|14-07-2024|Body|Accident|Awaiting
+MN012OP|Toyota|Camry|2017|White|preventive|17-07-2024|Engine and body|Accident|Awaiting
+GH567IJ|Toyota|Corolla|2015|Red|custom|21-07-2024|Left door|Small accident|Awaiting
+WX789YZ|Chevrolet|Impala|2017|Silver|preventive|17-08-2024|Tires|Tayar haus|In Progress
+UV789WX|Chevrolet|Spark|2018|Purple|regular|03-08-2024|Oil and services|Mileage|Awaiting
+CD234EF|Audi|A4|2016|Blue|custom|23-08-2024|Body|To add promotion sticker|Awaiting
+QR456ST|Honda|Fit|2020|Yellow|regular|12-07-2024|engine oil|expired|In Progress

@@ -1,317 +1,373 @@
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 import os
 
 
-# Collecting and updating data Functions --------------------------------------------------------------------------
+# Collecting and updating data Functions -------------------------------------------------------------------------------------------------------------------
 def keyboardInput(input_type, prompt, error_message):
     while True:
         try:
             return input_type(input(prompt))
         except ValueError:
             print(error_message)
+        except KeyboardInterrupt:
+            print("\nInput interrupted. Exiting...")
+            exit()
+        except Exception as e:
+            print(f"An unexpected error occurred: {e}")
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def validate_date_format(date_string):
     try:
-        if datetime.strptime(date_string, '%d-%m-%Y').date() >= datetime.now().date():
+        input_date = datetime.strptime(date_string, '%d-%m-%Y').date()
+        if input_date >= datetime.now().date():
             return True
         else:
             return False
     except ValueError:
+        print(f"Invalid date format: {date_string}. Please use 'DD-MM-YYYY'.")
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
         return False
 
 def collectdata():
     details = {}
     headers = []
+    lines = []
 
-    with open('cars.txt', 'r') as filehandler:
-        lines = filehandler.readlines()
-    for index, line in enumerate(lines):
-        if index > 0:
-            no_plat, brand, model, tahun, warna = line.strip().split('|')
-            details[no_plat] = {
-                "Brand": brand,
-                "Model": model,
-                "Year": int(tahun),
-                "Color": warna
-            }
-        elif index == 0:
-            headers = line.strip().split('|')
+    try:
+        with open('cars.txt', 'r') as filehandler:
+            lines = filehandler.readlines()
+
+        for index, line in enumerate(lines):
+            line = line.strip()
+            if index == 0:
+                headers = line.split('|')
+            else:
+                try:
+                    no_plat, brand, model, tahun, warna = line.split('|')
+                    details[no_plat] = {
+                        "Brand": brand,
+                        "Model": model,
+                        "Year": int(tahun),
+                        "Color": warna
+                    }
+                except ValueError as e:
+                    print(f"Error processing line {index + 1}: {line}. Error: {e}")
+                except Exception as e:
+                    print(f"Unexpected error processing line {index + 1}: {line}. Error: {e}")
+
+    except FileNotFoundError:
+        print("Error: 'cars.txt' file not found.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
     return headers, details, lines
 
 def collectCM():
     details = {}
     headers = []
-    
-    if os.path.exists('maintenance.txt'):
-        with open('maintenance.txt', 'r') as filehandler:
-            lines = filehandler.readlines()
-        for index, line in enumerate(lines):
-            if index > 0:
-                no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split('|')
-                details[no_plat] = {
-                    "Brand": brand,
-                    "Model": model,
-                    "Year": int(tahun),
-                    "Colour": warna,
-                    "Type": jenis,
-                    "Date": tarikh,
-                    "Parts": parts,
-                    "Reason": sebab,
-                    "Updates": update
-                }
-            elif index == 0:
-                headers = line.strip().split('|')
-    
-    return headers, details, lines if 'lines' in locals() else []
+    lines = []
+
+    try:
+        if os.path.exists('maintenance.txt'):
+            with open('maintenance.txt', 'r') as filehandler:
+                lines = filehandler.readlines()
+            
+            for index, line in enumerate(lines):
+                line = line.strip()
+                if index == 0:
+                    headers = line.split('|')
+                else:
+                    try:
+                        no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.split('|')
+                        details[no_plat] = {
+                            "Brand": brand,
+                            "Model": model,
+                            "Year": int(tahun),
+                            "Colour": warna,
+                            "Type": jenis,
+                            "Date": tarikh,
+                            "Parts": parts,
+                            "Reason": sebab,
+                            "Updates": update
+                        }
+                    except ValueError as e:
+                        print(f"Error processing line {index + 1}: {line}. Error: {e}")
+                    except Exception as e:
+                        print(f"Unexpected error processing line {index + 1}: {line}. Error: {e}")
+        else:
+            print("Error: 'maintenance.txt' file not found.")
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
+    return headers, details, lines
 
 def filtersearch():
-    clear_screen()
-    displayCM()
-    print("Filter Search for Maintenance Records")
-    # Ask user which parts they want to filter
-    print("Which part would you like to filter?")
-    print("1. Brand")
-    print("2. Model")
-    print("3. Year")
-    print("4. Colour")
-    print("5. Type of Maintenance")
-    print("6. Updates")
-    choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/6): ", "Choice must be an integer")
-    
-    filter_criteria = {}
-    
-    if choice == 1:
-        filter_criteria["Brand"] = input("Enter the brand: ").strip()
-    elif choice == 2:
-        filter_criteria["Model"] = input("Enter the model: ").strip()
-    elif choice == 3:
-        filter_criteria["Year"] = input("Enter the year: ").strip()
-    elif choice == 4:
-        filter_criteria["Colour"] = input("Enter the colour: ").strip()
-    elif choice == 5:
-        print("1. Regular Maintenance")
-        print("2. Preventive Maintenance")
-        print("3. Custom Maintenance")
-        type_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
-        if type_choice == 1:
-            filter_criteria["Type"] = "regular"
-        elif type_choice == 2:
-            filter_criteria["Type"] = "preventive"
-        elif type_choice == 3:
-            filter_criteria["Type"] = "custom"
-        else:
-            clear_screen()
-            print("\nInvalid choice.\n")
-            menufilter()
-    elif choice == 6:
-        print("1. Awaiting")
-        print("2. In Progress")
-        print("3. Completed")
-        update_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
-        if update_choice == 1:
-            filter_criteria["Updates"] = "Awaiting"
-        elif update_choice == 2:
-            filter_criteria["Updates"] = "In Progress"
-        elif update_choice == 3:
-            filter_criteria["Updates"] = "Completed"
-        else:
-            clear_screen()
-            print("\nInvalid choice.\n")
-            menufilter()
-    else:
+    try:
         clear_screen()
-        print("\nInvalid choice.\n")
+        displayCM()
+        print("Filter Search for Maintenance Records")
+        # Ask user which parts they want to filter
+        print("Which part would you like to filter?")
+        print("1. Brand")
+        print("2. Model")
+        print("3. Year")
+        print("4. Colour")
+        print("5. Type of Maintenance")
+        print("6. Updates")
+        choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/6): ", "Choice must be an integer")
+        
+        filter_criteria = {}
+        
+        if choice == 1:
+            filter_criteria["Brand"] = input("Enter the brand: ").strip()
+        elif choice == 2:
+            filter_criteria["Model"] = input("Enter the model: ").strip()
+        elif choice == 3:
+            filter_criteria["Year"] = input("Enter the year: ").strip()
+        elif choice == 4:
+            filter_criteria["Colour"] = input("Enter the colour: ").strip()
+        elif choice == 5:
+            print("1. Regular Maintenance")
+            print("2. Preventive Maintenance")
+            print("3. Custom Maintenance")
+            type_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
+            if type_choice == 1:
+                filter_criteria["Type"] = "regular"
+            elif type_choice == 2:
+                filter_criteria["Type"] = "preventive"
+            elif type_choice == 3:
+                filter_criteria["Type"] = "custom"
+            else:
+                clear_screen()
+                print("\nInvalid choice. Returning to filter menu.\n")
+                return filtersearch()
+        elif choice == 6:
+            print("1. Awaiting")
+            print("2. In Progress")
+            print("3. Completed")
+            update_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
+            if update_choice == 1:
+                filter_criteria["Updates"] = "Awaiting"
+            elif update_choice == 2:
+                filter_criteria["Updates"] = "In Progress"
+            elif update_choice == 3:
+                filter_criteria["Updates"] = "Completed"
+            else:
+                clear_screen()
+                print("\nInvalid choice. Returning to filter menu.\n")
+                return filtersearch()
+        else:
+            clear_screen()
+            print("\nInvalid choice. Returning to filter menu.\n")
+            return filtersearch()
+        
+        clear_screen()
+        displayCM(filter_criteria)
         menufilter()
     
-    clear_screen()
-    displayCM(filter_criteria)
-    menufilter()
+    except Exception as e:
+        clear_screen()
+        print(f"An unexpected error occurred: {e}")
+        menufilter()
 
 def updateCM(no_plat):
-    headers, details, lines = collectCM()
-    
-    # displayFilteredCM()
-    
-    # Ask user to enter the number plate of the car to update
-    
-    if no_plat in details:
-        car_details = details[no_plat]
-        
-        print(f"Select the update status for Car with license plate {no_plat}:")
-        print(f"(Current status: {car_details["Updates"]})")
-        print("1. Awaiting")
-        print("2. In progress")
-        print("3. Completed")
-        update_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
-        if update_choice == 1:
-            updates_of_maintenance = "Awaiting"
-        elif update_choice == 2:
-            updates_of_maintenance = "In Progress"
-        elif update_choice == 3:
-            updates_of_maintenance = "Completed"
-        else:
-            print("Invalid choice. Please choose 1 or 2 or 3.")
-            return
-        
-        # Update the maintenance status in maintenance.txt
-        with open('maintenance.txt', 'r') as filehandler:
-            lines = filehandler.readlines()
-        for index, line in enumerate(lines):
-            if line.startswith(no_plat):
-                lines[index] = f"{no_plat}|{car_details['Brand']}|{car_details['Model']}|{car_details['Year']}|{car_details['Colour']}|{car_details['Type']}|{car_details['Date']}|{car_details['Parts']}|{car_details['Reason']}|{updates_of_maintenance}\n"
-                break
-        with open('maintenance.txt', 'w') as filehandler:
-            for line in lines:
-                filehandler.write(line)
-        clear_screen()
-        print ("\nUpdates are as shown below:")
-        print(f"Car with license plate {no_plat} maintenance status has been updated to {updates_of_maintenance}.\n")
+    try:
+        headers, details, lines = collectCM()
 
-    else:
-        clear_screen()
-        print("\nInvalid number plate. Please enter a valid number plate.\n")
-
-# def filterCMByDateRange(start_date, end_date):
-#     headers, details, lines = collectCM()
-    
-#     no_platH, brandH, modelH, tahunH, warnaH, jenisH, tarikhH, partsH, sebabH, updateH = headers
-    
-#     # Filter records within the specified date range
-#     filtered_details = {
-#         no_plat: car_details
-#         for no_plat, car_details in details.items()
-#         if start_date <= datetime.strptime(car_details["Date"], '%d-%m-%Y') <= end_date
-#     }
-    
-#     sorted_details = sorted(filtered_details.items(), key=lambda item: datetime.strptime(item[1]["Date"], '%d-%m-%Y'))
-
-#     print(f"{no_platH:12}{jenisH:12}{tarikhH:12}{partsH:15}{sebabH:20}{updateH:12}")
-#     print("=" * 73)
-#     for no_plat, car_details in sorted_details:
-#         print(f"{no_plat:12}{car_details['Type']:12}{car_details['Date']:12}{car_details['Parts']:15}{car_details['Reason']:20}{car_details['Updates']:12}")
-def filterCMByDateRange(start_date, end_date):
-    headers, details, lines = collectCM()
-
-    if not headers or not details:
-        print("No car maintenance records found.")
-        return
-
-    # Define relevant headers and their widths
-    relevant_headers = ["No.plat", "Type", "Date", "Updates"]
-    min_widths = {
-        "No.plat": 9,
-        "Type": 15,
-        "Date": 12,
-        "Updates": 10
-    }
-
-    # Filter and sort records within the specified date range
-    filtered_details = {
-        no_plat: car_details
-        for no_plat, car_details in details.items()
-        if start_date <= datetime.strptime(car_details["Date"], '%d-%m-%Y') <= end_date
-    }
-    sorted_details = sorted(filtered_details.items(), key=lambda item: datetime.strptime(item[1]["Date"], '%d-%m-%Y'))
-
-    # Calculate the necessary column widths based on content
-    column_widths = min_widths.copy()
-    for no_plat, car_details in sorted_details:
-        for header in relevant_headers:
-            if header == "No.plat":
-                column_widths[header] = max(column_widths[header], len(no_plat))
+        # Ask user to enter the number plate of the car to update
+        if no_plat in details:
+            car_details = details[no_plat]
+            
+            print(f"Select the update status for Car with license plate {no_plat}:")
+            print(f"(Current status: {car_details['Updates']})")
+            print("1. Awaiting")
+            print("2. In Progress")
+            print("3. Completed")
+            
+            update_choice = keyboardInput(int, "Enter your choice (1/2/3): ", "Choice must be an integer")
+            
+            if update_choice == 1:
+                updates_of_maintenance = "Awaiting"
+            elif update_choice == 2:
+                updates_of_maintenance = "In Progress"
+            elif update_choice == 3:
+                updates_of_maintenance = "Completed"
             else:
-                column_widths[header] = max(column_widths[header], len(str(car_details[header])))
+                clear_screen()
+                print("Invalid choice. Please choose 1 or 2 or 3.")
+                return
+            
+            # Update the maintenance status in maintenance.txt
+            with open('maintenance.txt', 'r') as filehandler:
+                lines = filehandler.readlines()
+                
+            for index, line in enumerate(lines):
+                if line.startswith(no_plat):
+                    lines[index] = f"{no_plat}|{car_details['Brand']}|{car_details['Model']}|{car_details['Year']}|{car_details['Colour']}|{car_details['Type']}|{car_details['Date']}|{car_details['Parts']}|{car_details['Reason']}|{updates_of_maintenance}\n"
+                    break
+            
+            with open('maintenance.txt', 'w') as filehandler:
+                for line in lines:
+                    filehandler.write(line)
+                    
+            clear_screen()
+            print("\nUpdates are as shown below:")
+            print(f"Car with license plate {no_plat} maintenance status has been updated to {updates_of_maintenance}.\n")
 
-    # Define the format strings based on the calculated widths
-    header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
-    row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
+        else:
+            clear_screen()
+            print("\nInvalid number plate. Please enter a valid number plate.\n")
+    except Exception as e:
+        clear_screen()
+        print(f"An unexpected error occurred: {e}")
 
-    # Print the headers
-    print()
-    print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
-    print(header_format.format(*relevant_headers))
-    print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+def filterCMByDateRange(start_date, end_date):
+    try:
+        headers, details, lines = collectCM()
 
-    # Print the rows
-    for no_plat, car_details in sorted_details:
-        print(row_format.format(
-            no_plat,
-            car_details["Type"],
-            car_details["Date"],
-            car_details["Updates"]
-        ))
-    print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
-    print()
+        if not headers or not details:
+            print("No car maintenance records found.")
+            return
 
-# Display Functions --------------------------------------------------------------------------
-def displayCM(filter_criteria=None):
-    headers, details, lines = collectCM()
+        # Convert start_date and end_date to datetime.date objects if they are datetime.datetime objects
+        if isinstance(start_date, datetime):
+            start_date = start_date.date()
+        if isinstance(end_date, datetime):
+            end_date = end_date.date()
 
-    if not headers or not details:
-        print("No car maintenance records found.")
-        return
+        # Define relevant headers and their widths
+        relevant_headers = ["No.plat", "Type", "Date", "Updates"]
+        min_widths = {
+            "No.plat": 9,
+            "Type": 15,
+            "Date": 12,
+            "Updates": 10
+        }
 
-    # Apply filter criteria if any
-    if filter_criteria:
-        filtered_details = {k: v for k, v in details.items() if all(str(v.get(key, '')).lower() == str(value).lower() for key, value in filter_criteria.items())}
-    else:
-        filtered_details = details
+        # Filter and sort records within the specified date range
+        filtered_details = {
+            no_plat: car_details
+            for no_plat, car_details in details.items()
+            if start_date <= datetime.strptime(car_details["Date"], '%d-%m-%Y').date() <= end_date
+        }
+        sorted_details = sorted(filtered_details.items(), key=lambda item: datetime.strptime(item[1]["Date"], '%d-%m-%Y'))
 
-    if not filtered_details:
-        print("No car maintenance records match the filter criteria.")
-        return
+        # Calculate the necessary column widths based on content
+        column_widths = min_widths.copy()
+        for no_plat, car_details in sorted_details:
+            for header in relevant_headers:
+                if header == "No.plat":
+                    column_widths[header] = max(column_widths[header], len(no_plat))
+                else:
+                    column_widths[header] = max(column_widths[header], len(str(car_details[header])))
 
-    # Set minimum column widths
-    min_widths = {
-        "No.plat": 9,
-        "Brand": 9,
-        "Model": 9,
-        "Year": 6,
-        "Colour": 12,
-        "Type": 15,
-        "Date": 12,
-        "Parts": 15,
-        "Reason": 20,
-        "Updates": 10
-    }
+        # Define the format strings based on the calculated widths
+        header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
+        row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
 
-    # Calculate the necessary column widths based on content
-    column_widths = min_widths.copy()
-    for no_plat, car_details in filtered_details.items():
-        for header, value in car_details.items():
-            column_widths[header] = max(column_widths[header], len(str(value)))
-        column_widths["No.plat"] = max(column_widths["No.plat"], len(no_plat))
+        # Print the headers
+        print()
+        print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+        print(header_format.format(*relevant_headers))
+        print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
 
-    # Define the format strings based on the calculated widths
-    header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in headers])
-    row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in headers])
-
-    # Print the headers
-    print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
-    print(header_format.format(*headers))
-    print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
-
-    # Print the rows in the order they appear in the file
-    for line in lines[1:]:
-        no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split('|')
-        if no_plat in filtered_details:
-            car_details = filtered_details[no_plat]
+        # Print the rows
+        for no_plat, car_details in sorted_details:
             print(row_format.format(
                 no_plat,
-                car_details["Brand"],
-                car_details["Model"],
-                car_details["Year"],
-                car_details["Colour"],
                 car_details["Type"],
                 car_details["Date"],
-                car_details["Parts"],
-                car_details["Reason"],
                 car_details["Updates"]
             ))
-    print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
+        print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+        print()
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+# Display Functions -----------------------------------------------------------------------------------------------------------------------------------------
+def displayCM(filter_criteria=None):
+    try:
+        headers, details, lines = collectCM()
+
+        if not headers or not details:
+            print("No car maintenance records found.")
+            return
+
+        # Apply filter criteria if any
+        if filter_criteria:
+            filtered_details = {k: v for k, v in details.items() if all(str(v.get(key, '')).lower() == str(value).lower() for key, value in filter_criteria.items())}
+        else:
+            filtered_details = details
+
+        if not filtered_details:
+            print("No car maintenance records match the filter criteria.")
+            return
+
+        # Set minimum column widths
+        min_widths = {
+            "No.plat": 9,
+            "Brand": 9,
+            "Model": 9,
+            "Year": 6,
+            "Colour": 12,
+            "Type": 15,
+            "Date": 12,
+            "Parts": 15,
+            "Reason": 20,
+            "Updates": 10
+        }
+
+        # Calculate the necessary column widths based on content
+        column_widths = min_widths.copy()
+        for no_plat, car_details in filtered_details.items():
+            for header, value in car_details.items():
+                column_widths[header] = max(column_widths[header], len(str(value)))
+            column_widths["No.plat"] = max(column_widths["No.plat"], len(no_plat))
+
+        # Define the format strings based on the calculated widths
+        header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in headers])
+        row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in headers])
+
+        # Print the headers
+        print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
+        print(header_format.format(*headers))
+        print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
+
+        # Print the rows in the order they appear in the file
+        for line in lines[1:]:
+            try:
+                no_plat, brand, model, tahun, warna, jenis, tarikh, parts, sebab, update = line.strip().split('|')
+                if no_plat in filtered_details:
+                    car_details = filtered_details[no_plat]
+                    print(row_format.format(
+                        no_plat,
+                        car_details["Brand"],
+                        car_details["Model"],
+                        car_details["Year"],
+                        car_details["Colour"],
+                        car_details["Type"],
+                        car_details["Date"],
+                        car_details["Parts"],
+                        car_details["Reason"],
+                        car_details["Updates"]
+                    ))
+            except ValueError as e:
+                print(f"Error processing line: {line}. Error: {e}")
+                continue
+
+        # Print bottom border
+        print("=" * (sum(column_widths.values()) + (len(headers) - 1) * 2))
+    
+    except FileNotFoundError:
+        print("Error: File 'maintenance.txt' not found.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
 
 def displayFilteredCM(filter_criteria=None):
     headers, details, lines = collectCM()
@@ -320,7 +376,7 @@ def displayFilteredCM(filter_criteria=None):
         print("No car maintenance records found.")
         return
 
-    # Define relevant headers and their widths
+    # Define relevant headers and their minimum widths
     relevant_headers = ["No.plat", "Type", "Date", "Updates"]
     min_widths = {
         "No.plat": 9,
@@ -329,41 +385,48 @@ def displayFilteredCM(filter_criteria=None):
         "Updates": 10
     }
 
-    # Calculate the necessary column widths based on content
+    # Calculate column widths based on content
     column_widths = min_widths.copy()
     for no_plat, car_details in details.items():
         for header in relevant_headers:
             if header == "No.plat":
                 column_widths[header] = max(column_widths[header], len(no_plat))
             else:
-                column_widths[header] = max(column_widths[header], len(str(car_details[header])))
-    
-    # Define the format strings based on the calculated widths
+                column_widths[header] = max(column_widths[header], len(str(car_details.get(header, "")) or ""))
+
+    # Define format strings based on calculated widths
     header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
     row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
 
-    # Print the headers
+    # Print headers
     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
     print(header_format.format(*relevant_headers))
     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
 
-    # Print the rows with optional filtering
-    for no_plat, car_details in details.items():
-        if filter_criteria:
+    # Print rows with optional filtering
+    if filter_criteria:
+        filtered_details = {}
+        for no_plat, car_details in details.items():
             match = True
             for key, value in filter_criteria.items():
-                if car_details.get(key, "") != value and no_plat != value:
+                if str(car_details.get(key, "")).lower() != str(value).lower() and no_plat != value:
                     match = False
                     break
-            if not match:
-                continue
+            if match:
+                filtered_details[no_plat] = car_details
+    else:
+        filtered_details = details
 
-        print(row_format.format(
-            no_plat,
-            car_details["Type"],
-            car_details["Date"],
-            car_details["Updates"]
-        ))
+    if not filtered_details:
+        print("No car maintenance records match the filter criteria.")
+    else:
+        for no_plat, car_details in filtered_details.items():
+            print(row_format.format(
+                no_plat,
+                car_details["Type"],
+                car_details["Date"],
+                car_details["Updates"]
+            ))
     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
 
 def display_selected_cars(no_plat):
@@ -389,119 +452,158 @@ def display_selected_cars(no_plat):
         print("\nInvalid number plate. Please enter a valid number plate.\n")
 
 def displayThisWeekCM():
-    today = datetime.now()
-    start_of_week = today - timedelta(days=today.weekday())
-    end_of_week = start_of_week + timedelta(days=6)
-    filterCMByDateRange(start_of_week, end_of_week)
+    try:
+        today = datetime.now()
+        start_of_week = today - timedelta(days=today.weekday())
+        end_of_week = start_of_week + timedelta(days=6)
+        filterCMByDateRange(start_of_week, end_of_week)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def displaythisMonthCM():
-    today = datetime.now()
-    start_of_month = today.replace(day=1)
-    if today.month == 12:
-        end_of_month = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
-    else:
-        end_of_month = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
-    filterCMByDateRange(start_of_month, end_of_month)
+    try:
+        today = datetime.now()
+        start_of_month = today.replace(day=1)
+        if today.month == 12:
+            end_of_month = today.replace(year=today.year + 1, month=1, day=1) - timedelta(days=1)
+        else:
+            end_of_month = today.replace(month=today.month + 1, day=1) - timedelta(days=1)
+        filterCMByDateRange(start_of_month, end_of_month)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
 def displayNextMonthCM():
-    today = datetime.now()
-    if today.month == 12:
-        start_of_next_month = today.replace(year=today.year + 1, month=1, day=1)
-        end_of_next_month = start_of_next_month.replace(year=today.year + 1, month=2, day=1) - timedelta(days=1)
-    else:
-        start_of_next_month = today.replace(month=today.month + 1, day=1)
-        if today.month == 11:
-            end_of_next_month = today.replace(year=today.year, month=12, day=31)
+    try:
+        today = datetime.now()
+        if today.month == 12:
+            start_of_next_month = today.replace(year=today.year + 1, month=1, day=1)
+            end_of_next_month = start_of_next_month.replace(year=today.year + 1, month=2, day=1) - timedelta(days=1)
         else:
-            end_of_next_month = today.replace(month=today.month + 2, day=1) - timedelta(days=1)
-    filterCMByDateRange(start_of_next_month, end_of_next_month)
+            start_of_next_month = today.replace(month=today.month + 1, day=1)
+            if today.month == 11:
+                end_of_next_month = today.replace(year=today.year, month=12, day=31)
+            else:
+                end_of_next_month = today.replace(month=today.month + 2, day=1) - timedelta(days=1)
+        filterCMByDateRange(start_of_next_month, end_of_next_month)
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-
-# Menus Functions --------------------------------------------------------------------------
+# Menus Functions --------------------------------------------------------------------------------------------------------------------------------------------
 def menuCMS():
     print("This week schedule: ")
     displayThisWeekCM()
     while True:
-        print("Schedule Menu:")
-        print("1. Car Details")
-        print("2. This Week")
-        print("3. This Month")
-        print("4. Next Month")
-        print("5. Main Menu")
-        print("0. Exit")
-        choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/0): ", "Choice must be an integer")
-        if choice not in [0, 1, 2, 3, 4, 5]:
-            clear_screen()
-            print("Invalid choice. Please enter a valid option.")
-            continue
-        
-        if choice == 2:
-            clear_screen()
-            print("This week schedule: ")
-            displayThisWeekCM()
-        elif choice == 3:
-            clear_screen()
-            print("This month schedule: ")
-            displaythisMonthCM()
-        elif choice == 4:
-            clear_screen()
-            print("Next month schedule: ")
-            displayNextMonthCM()
-        elif choice == 5:
-            main()
-            break
-        elif choice == 0:
-            clear_screen()
-            exit()
-        elif choice == 1:
-            no_plat = input("Enter the number plate of the car: ").strip()
-            if no_plat == "":
-                clear_screen()
-                print("\nNo car plate entered. Please try again.\n")
-                continue
-            clear_screen()
-            display_selected_cars(no_plat)
+        try:
+            print("Schedule Menu:")
+            print("1. Car Details")
+            print("2. This Week")
+            print("3. This Month")
+            print("4. Next Month")
+            print("5. Main Menu")
+            print("0. Exit")
             
+            choice = keyboardInput(int, "Enter your choice (1/2/3/4/5/0): ", "Choice must be an integer")
+            
+            if choice == 1:
+                no_plat = input("Enter the number plate of the car: ").strip()
+                if not no_plat:
+                    clear_screen()
+                    print("\nNo car plate entered. Please try again.\n")
+                    continue
+                clear_screen()
+                display_selected_cars(no_plat)
+                
+            elif choice == 2:
+                clear_screen()
+                print("This week schedule: ")
+                displayThisWeekCM()
+                
+            elif choice == 3:
+                clear_screen()
+                print("This month schedule: ")
+                displaythisMonthCM()
+                
+            elif choice == 4:
+                clear_screen()
+                print("Next month schedule: ")
+                displayNextMonthCM()
+                
+            elif choice == 5:
+                main()
+                break
+                
+            elif choice == 0:
+                clear_screen()
+                exit()
+                
+            else:
+                clear_screen()
+                print("Invalid choice. Please enter a valid option.")
+        
+        except ValueError:
+            clear_screen()
+            print("Invalid input. Please enter a valid integer choice.")
+        
+        except Exception as e:
+            clear_screen()
+            print(f"An error occurred: {e}")
 
 def menuBeforeMaintenance():
     while True:
-        displayFilteredCM()
-        print("Menu:")
-        print("1. Display Selected Cars")
-        print("2. Update Maintenance Status")
-        print("3. Main Menu")
-        print("0. Exit")
-        choice = keyboardInput(int, "Enter your choice (1/2/3/0): ", "Choice must be an integer")
+        try:
+            displayFilteredCM()
+            print("Menu:")
+            print("1. Display Selected Cars")
+            print("2. Update Maintenance Status")
+            print("3. Main Menu")
+            print("0. Exit")
+            
+            choice = keyboardInput(int, "Enter your choice (1/2/3/0): ", "Choice must be an integer")
 
-        if choice not in [1, 2, 3, 0]:
-            clear_screen()
-            print("Invalid choice. Please enter a valid option.")
-            continue
+            if choice == 1:
+                no_plat_1 = input("Enter the number plate of the car for display: ").strip()
+                if not no_plat_1:
+                    clear_screen()
+                    print("\nNo car plate entered. Please try again.\n")
+                    continue
+                elif no_plat_1.lower() == "exit":
+                    print("Exiting...")
+                    break
+                clear_screen()
+                display_selected_cars(no_plat_1)
+                
+            elif choice == 2:
+                no_plat_2 = input("Enter the number plate of the car for update: ").strip()
+                if not no_plat_2:
+                    clear_screen()
+                    print("\nNo car plate entered. Please try again.\n")
+                    continue
+                elif no_plat_2.lower() == "exit":
+                    print("Exiting...")
+                    break
+                clear_screen()
+                updateCM(no_plat_2)
+                
+            elif choice == 3:
+                print("Returning to Main Menu...")
+                main()
+                break
+                
+            elif choice == 0:
+                clear_screen()
+                exit()
+                
+            else:
+                clear_screen()
+                print("Invalid choice. Please enter a valid option.")
         
-        if choice == 0:
+        except ValueError:
             clear_screen()
-            exit()
-
-        if choice == 3:
-            print ("We will go back to Main Menu.")
-            main()
-            break
-
-        no_plat = input("Enter the number plate of the car: ").strip()
-        if no_plat == "":
+            print("Invalid input. Please enter a valid integer choice.")
+        
+        except Exception as e:
             clear_screen()
-            print("\nNo car plate entered. Please try again.\n")
-            continue
-        elif no_plat == "exit":
-            print("Exiting...")
-            break
-
-        if choice == 1:
-            clear_screen()
-            display_selected_cars(no_plat)
-        elif choice == 2:
-            clear_screen()
-            updateCM(no_plat)
+            print(f"An error occurred: {e}")
 
 def maintenanceMenu():
     headers, details, lines = collectdata()
@@ -602,7 +704,9 @@ def menufilter():
         print("2. Maintenance List")
         print("3. Main Menu")
         print("0. Exit")
+        
         choice = keyboardInput(int, "Enter your choice (1/2/3/0): ", "Choice must be an integer")
+        
         if choice not in [1, 2, 3, 0]:
             clear_screen()
             print("\nInvalid choice. Please enter a valid option.\n")
@@ -612,16 +716,19 @@ def menufilter():
             clear_screen()
             displayCM()
         elif choice == 1:
+            clear_screen()
             filtersearch()
-            return
+            # Ensure that after filtering, the user returns to the menu
+            input("\nPress Enter to return to the Menu...")
+            clear_screen()
         elif choice == 3:
-            print ("We will go back to Main Menu.")
+            print("Returning to Main Menu.")
             main()
             break
         elif choice == 0:
             clear_screen()
             exit()
-    
+
 def main():
     clear_screen()
     print("=" * 50)
@@ -656,7 +763,6 @@ def main():
             print("Invalid choice. Please choose from the options.")
             continue
 
-
-# Running Main --------------------------------------------------------------------------
+# Running Main -------------------------------------------------------------------------------------------------------------------------------------------------
 if __name__ == "__main__":
     main()

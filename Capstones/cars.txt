@@ -11,7 +11,6 @@ KL890MN|Honda|Civic|2018|Blue
 OP123QR|Ford|Focus|2020|Black
 WX789YZ|Chevrolet|Impala|2017|Silver
 AB234CD|Audi|A6|2019|Gray
-IJ890KL|Ford|Fusion|2016|Blue
 MN123OP|Toyota|Prius|2021|Green
 QR456ST|Honda|Fit|2020|Yellow
 UV789WX|Chevrolet|Spark|2018|Purple

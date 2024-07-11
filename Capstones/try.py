@@ -290,6 +290,126 @@ def filterCMByDateRange(start_date, end_date):
     except Exception as e:
         print(f"An error occurred: {e}")
 
+# def deletePassedMaintenance():
+#     # Read the current maintenance records from maintenance.txt
+#     with open('maintenance.txt', 'r') as file:
+#         lines = file.readlines()
+
+#     if not lines:
+#         print("No maintenance records found.")
+#         return
+
+#     # Get today's date for comparison
+#     today = datetime.now()
+
+#     # Filter records where the maintenance date has passed, excluding today's date
+#     updated_lines = [line for line in lines if not isMaintenancePassed(line, today)]
+
+#     # Write the updated records back to maintenance.txt
+#     with open('maintenance.txt', 'w') as file:
+#         file.writelines(updated_lines)
+
+#     print("Deleted maintenance records of cars whose maintenance date has passed.")
+
+# def isMaintenancePassed(line, today):
+#     # Extract the date from the line and convert it to datetime object
+#     fields = line.strip().split('|')
+#     if len(fields) < 8:
+#         return False  # Incomplete line, skip processing
+
+#     maintenance_date_str = fields[6]  # Assuming Date is the 7th field
+#     try:
+#         maintenance_date = datetime.strptime(maintenance_date_str, '%d-%m-%Y')
+#     except ValueError:
+#         return False  # Invalid date format, skip processing
+
+#     # Check if the maintenance date is before today's date
+#     return maintenance_date < today and maintenance_date.date() != today.date()
+
+# def delete_selected_maintenance():
+#     headers, details, lines = collectCM()
+
+#     if not headers or not details:
+#         print("No car maintenance records found.")
+#         return
+
+#     # Define relevant headers and their widths
+#     relevant_headers = ["No.plat", "Brand", "Model", "Year", "Colour", "Type", "Date", "Parts", "Reason", "Updates"]
+#     min_widths = {
+#         "No.plat": 9,
+#         "Brand": 9,
+#         "Model": 9,
+#         "Year": 6,
+#         "Colour": 12,
+#         "Type": 15,
+#         "Date": 12,
+#         "Parts": 15,
+#         "Reason": 20,
+#         "Updates": 10
+#     }
+
+#     # Calculate the necessary column widths based on content
+#     column_widths = min_widths.copy()
+#     for no_plat, car_details in details.items():
+#         for header in relevant_headers:
+#             column_widths[header] = max(column_widths[header], len(str(car_details.get(header, ''))))
+#         column_widths["No.plat"] = max(column_widths["No.plat"], len(no_plat))
+
+#     # Define the format strings based on the calculated widths
+#     header_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
+#     row_format = '  '.join([f"{{:<{column_widths[header]}}}" for header in relevant_headers])
+
+#     # Print the headers
+#     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+#     print(header_format.format(*relevant_headers))
+#     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+
+#     # Print the rows with row numbers for selection
+#     row_numbers = {}
+#     for index, line in enumerate(lines[1:], start=1):  # Skip headers, start index from 1
+#         no_plat, brand, model, year, colour, type_, date, parts, reason, updates = line.strip().split('|')
+#         row_numbers[index] = no_plat  # Map row number to car plate number
+#         print(row_format.format(
+#             no_plat,
+#             brand,
+#             model,
+#             year,
+#             colour,
+#             type_,
+#             date,
+#             parts,
+#             reason,
+#             updates
+#         ))
+
+#     print("=" * (sum(column_widths.values()) + (len(relevant_headers) - 1) * 2))
+
+#     # Ask user which record to delete by car plate number
+#     while True:
+#         no_plat_to_delete = input("Enter the license plate number of the car to delete: ").strip().upper()
+#         if no_plat_to_delete not in details:
+#             print("Invalid car plate number. Please enter a valid license plate number.")
+#         else:
+#             break
+
+#     # Confirm deletion with user
+#     confirmed = input(f"Are you sure you want to delete record for car with license plate {no_plat_to_delete}? (y/n): ").strip().lower()
+
+#     if confirmed != 'y':
+#         print("Deletion canceled.")
+#         return
+
+#     # Remove the selected record from lines
+#     updated_lines = [line for line in lines if not line.startswith(no_plat_to_delete)]
+
+#     # Write the updated records back to maintenance.txt
+#     with open('maintenance.txt', 'w') as file:
+#         file.write(lines[0])  # Write back the headers
+#         for line in updated_lines:
+#             file.write(line + '\n')
+
+#     print(f"Record for car with license plate {no_plat_to_delete} deleted successfully from maintenance records.")
+
 # Display Functions -----------------------------------------------------------------------------------------------------------------------------------------
 def displayCM(filter_criteria=None):
     try:
@@ -740,9 +860,11 @@ def main():
         print("2. Add a car into maintenance list")
         print("3. Update status car maintenance")
         print("4. Display schedule service")
+        print("5. Delete passed maintenance")
+        print("6. Delete car information")
         print("0. Exit")
         print("=" * 50)
-        choice = keyboardInput(int, "Choice (1, 2, 3, 4, 0): ", "Choice must be an integer")
+        choice = keyboardInput(int, "Choice (1, 2, 3, 4, 5, 0): ", "Choice must be an integer")
         if choice == 1:
             clear_screen()
             displayCM()
@@ -756,6 +878,12 @@ def main():
         elif choice == 4:
             clear_screen()
             menuCMS()
+        elif choice == 5:
+            clear_screen()
+            # deletePassedMaintenance()
+        elif choice == 6:
+            clear_screen()
+            # delete_selected_maintenance()
         elif choice == 0:
             clear_screen()  
             exit()

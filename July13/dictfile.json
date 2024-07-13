@@ -1,0 +1,21 @@
+[
+    {
+        "product":"Television",
+        "quantity":"10",
+        "price":"1000",
+        "suppliers":{
+            "name":"John",
+            "company":"John.co"
+        }
+    },
+    {
+        "product":"Laptop",
+        "quantity":"30",
+        "price":"20000",
+        "suppliers":{
+            "name":"pokok",
+            "company":"pokok.co"
+        }
+    }
+]
+
